@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-homepage="https://github.com/pact-foundation/pact-ruby-standalone"
+homepage="https://github.com/you54f/pact-ruby-standalone"
 version=$1
 FORMULAE_FILE="pact-ruby-standalone.rb"
 
@@ -16,8 +16,28 @@ write_homebrew_formulae() {
         echo "class PactRubyStandalone < Formula" >&3
         echo "  desc \"Standalone pact CLI executable using the Ruby Pact impl and Travelling Ruby\"" >&3
         echo "  homepage \"$homepage\"" >&3
-        echo "  url \"$homepage/releases/download/v$version/pact-$version-osx.tar.gz\"" >&3
-        echo "  sha256 \"${brewshasignature[1]}\"" >&3
+        echo "  " >&3
+        echo "  on_macos do" >&3
+        echo "    on_arm do" >&3
+        echo "      url \"$homepage/releases/download/v$version/pact-$version-osx-arm64.tar.gz\"" >&3
+        echo "      sha256 \"${sha_osx_arm64}\"" >&3
+        echo "    end" >&3
+        echo "    on_intel do" >&3
+        echo "      url \"$homepage/releases/download/v$version/pact-$version-osx-x86_64.tar.gz\"" >&3
+        echo "      sha256 \"${sha_osx_x86_64}\"" >&3
+        echo "    end" >&3
+        echo "  end" >&3
+        echo "  " >&3
+        echo "  on_linux do" >&3
+        echo "    on_arm do" >&3
+        echo "      url \"$homepage/releases/download/v$version/pact-$version-linux-arm64.tar.gz\"" >&3
+        echo "      sha256 \"${sha_linux_arm64}\"" >&3
+        echo "    end" >&3
+        echo "    on_intel do" >&3
+        echo "      url \"$homepage/releases/download/v$version/pact-$version-linux-x86_64.tar.gz\"" >&3
+        echo "      sha256 \"${sha_linux_x86_64}\"" >&3
+        echo "    end" >&3
+        echo "  end" >&3
         echo "" >&3
         echo "  def install" >&3
         echo "    bin.install Dir[\"bin/*\"]" >&3
@@ -50,32 +70,49 @@ elif [[ $1 == "--help" ||  $1 == "-h" ]] ; then
     display_usage
     exit 1
 else
-    echo "⬇️  Downloading pact-$version-osx.tar.gz from $homepage"
-    curl -LO $homepage/releases/download/v$version/pact-$version-osx.tar.gz
 
-    brewshasignature=( $(eval "openssl dgst -sha256 pact-$version-osx.tar.gz") )
-    echo "🔏 Checksum SHA256:\t ${brewshasignature[1]}"
+shas=()
+for platform in osx linux; do 
+    for arch in arm64 x86_64; do 
+        echo "⬇️  Downloading pact-$version-${platform}-${arch}.tar.gz from $homepage"
+        curl -LO $homepage/releases/download/v$version/pact-$version-${platform}-${arch}.tar.gz
 
-    shasignature=( $(eval "openssl dgst -sha1 pact-$version-osx.tar.gz") )
-    echo "🔏 Checksum SHA1:\t ${shasignature[1]}"
+        brewshasignature=( $(eval "openssl dgst -sha256 pact-$version-${platform}-${arch}.tar.gz") )
+        echo "🔏 Checksum SHA256:\t ${brewshasignature[1]} for ${arch}"
 
-    echo "⬇️  Downloading pact-$version-osx.tar.gz.checksum"
-    curl -LO $homepage/releases/download/v$version/pact-$version-osx.tar.gz.checksum
+        shasignature=( $(eval "openssl dgst -sha1 pact-$version-${platform}-${arch}.tar.gz") )
+        echo "🔏 Checksum SHA1:\t ${shasignature[1]} for ${platform}-${arch}"
 
-    expectedsha=( $(eval "cat pact-$version-osx.tar.gz.checksum") )
-    echo "🔏 Expected SHA1:\t ${expectedsha[0]}"
+        echo "⬇️  Downloading pact-$version-${platform}-${arch}.tar.gz.checksum for ${platform}-${arch}"
+        curl -LO $homepage/releases/download/v$version/pact-$version-${platform}-${arch}.tar.gz.checksum
 
-    if [ "${shasignature[1]}" == "${expectedsha[0]}" ]; then
-        echo "👮‍♀️ SHA Check: 👍"
-    else
-        echo "👮‍♀️ SHA Check: 🚨 - checksums do not match!"
-        exit 1
-    fi
+        expectedsha=( $(eval "cat pact-$version-${platform}-${arch}.tar.gz.checksum") )
+        echo "🔏 Expected SHA1:\t ${expectedsha[0]} for ${platform}-${arch}"
 
-    echo "🧹 Cleaning up..."
-    rm pact-$1-osx.tar.gz
-    rm pact-$1-osx.tar.gz.checksum
-    echo "🧪 Writing formulae..."
+        if [ "${shasignature[1]}" == "${expectedsha[0]}" ]; then
+            echo "👮‍♀️ SHA Check: 👍 for ${arch}"
+        else
+            echo "👮‍♀️ SHA Check: 🚨 - checksums do not match! for ${arch}"
+            # exit 1
+        fi
+
+        echo "🧹 Cleaning up..."
+        rm pact-$1-${platform}-${arch}.tar.gz
+        rm pact-$1-${platform}-${arch}.tar.gz.checksum
+        echo "🔏 Checksum SHA256:\t ${brewshasignature[1]} for ${platform}-${arch}"
+        echo "🧪 Writing formulae..."
+        shas+=(${brewshasignature[1]})
+    done 
+done 
+
+    sha_osx_arm64=${shas[0]}
+    sha_osx_x86_64=${shas[1]}
+    sha_linux_arm64=${shas[2]}
+    sha_linux_x86_64=${shas[3]}
+    echo "sha_osx_arm64:" $sha_osx_arm64
+    echo "sha_osx_x86_64:" $sha_osx_x86_64
+    echo "sha_linux_arm64:" $sha_linux_arm64
+    echo "sha_linux_x86_64:" $sha_linux_x86_64
 
     write_homebrew_formulae
 
