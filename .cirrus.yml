@@ -31,11 +31,11 @@ linux_arm64_task:
       cd homebrew/
       rbenv local 2.6.8
       cd ..
+      export HOMEBREW_DEVELOPER=1
+      export HOMEBREW_USE_RUBY_FROM_PATH=1
       brew update --force --quiet
       brew doctor
       chmod -R go-w "$(brew --prefix)/share/zsh"
-      # export HOMEBREW_DEVELOPER=1
-      # export HOMEBREW_USE_RUBY_FROM_PATH=1
   << : *BUILD_TEST_TASK_TEMPLATE
 
 macosx_arm64_task: 
