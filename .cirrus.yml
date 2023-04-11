@@ -18,8 +18,8 @@ linux_arm64_task:
     cpu: 4
     memory: 12G
   setup_script: |
-      apt-get update
-      apt-get install build-essential libz-dev
+      apt-get update --yes
+      apt-get install --yes build-essential libz-dev libreadline-dev
       git clone https://github.com/rbenv/rbenv.git ~/.rbenv
       echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
       source ~/.bashrc
