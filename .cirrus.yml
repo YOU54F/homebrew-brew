@@ -20,7 +20,6 @@ linux_arm64_task:
   setup_script: |
       ruby --version
       git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-      git clone https://github.com/rbenv/rbenv.git ~/.rbenv
       echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
       source ~/.bashrc
       git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
