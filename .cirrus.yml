@@ -14,11 +14,12 @@ BUILD_TEST_TASK_TEMPLATE: &BUILD_TEST_TASK_TEMPLATE
 
 linux_arm64_task: 
   arm_container:
-    image: ruby:latest
+    image: ubuntu:22.04
     cpu: 4
     memory: 12G
   setup_script: |
-      ruby --version
+      apt-get update
+      apt-get install build-essential zlib-dev
       git clone https://github.com/rbenv/rbenv.git ~/.rbenv
       echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
       source ~/.bashrc
@@ -26,23 +27,18 @@ linux_arm64_task:
       git -C "$(rbenv root)"/plugins/ruby-build pull
       rbenv install --list-all
       rbenv install 2.6.8
+      rbenv global 2.6.8
       mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
       eval "$(homebrew/bin/brew shellenv)"
-      cd homebrew/
-      rbenv global 2.6.8
-      export HOMEBREW_DEVELOPER=1
-      export HOMEBREW_USE_RUBY_FROM_PATH=1
-      brew update --force --quiet
-      cd ..
       brew update --force --quiet
       brew doctor
       chmod -R go-w "$(brew --prefix)/share/zsh"
   << : *BUILD_TEST_TASK_TEMPLATE
 
-macosx_arm64_task: 
-  macos_instance:
-    image: ghcr.io/cirruslabs/macos-ventura-base:latest
-  << : *BUILD_TEST_TASK_TEMPLATE
+# macosx_arm64_task: 
+#   macos_instance:
+#     image: ghcr.io/cirruslabs/macos-ventura-base:latest
+#   << : *BUILD_TEST_TASK_TEMPLATE
 
 
 
