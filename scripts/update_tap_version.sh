@@ -66,7 +66,7 @@ write_homebrew_formulae() {
         echo "      sha256 \"${sha_linux_x86_64}\"" >&3
         echo "      resource \"pact_verifier_cli\" do" >&3
         echo "          url \"$homepage_pact_reference/releases/download/pact_verifier_cli-v$version_pact_verifier_cli/pact_verifier_cli-linux-x86_64.gz\"" >&3
-        echo "          sha256 \"${sha_linux_arm64_pact_verifier_cli}\"" >&3
+        echo "          sha256 \"${sha_linux_x86_64_pact_verifier_cli}\"" >&3
         echo "      end" >&3
         echo "      resource \"pact_mock_server_cli\" do" >&3
         echo "          url \"$homepage_pact_reference/releases/download/pact_mock_server_cli-v$version_pact_mock_server_cli/pact_mock_server_cli-linux-x86_64.gz\"" >&3
@@ -240,17 +240,6 @@ done
     echo "sha_linux_x86_64_pact_mock_server_cl:" $sha_linux_x86_64_pact_mock_server_cli
 
     write_homebrew_formulae
-
-    # echo "⚗️  Sorting out the homebrew tap version... "
-    # git checkout -b version/v$version
-    # git add $FORMULAE_FILE
-    # git commit -m "chore(release): Update version to v$version"
-    # git push --set-upstream origin version/v$version
-
-    # echo "👏  Go and open that PR now:"
-    # echo "🔗  $homepage/compare/master...version/v$version"
-
-    # hub pull-request --message "chore(release): Update version to v${version}"
 
     echo "🎉 Done!"
 

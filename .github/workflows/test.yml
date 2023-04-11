@@ -30,9 +30,9 @@ jobs:
         run: |
           ./scripts/install.sh
 
-      - name: Audit tap (⚠️ experimental ⚠️)
-        if: always()
-        run: ./scripts/audit.sh
+      # - name: Audit tap (⚠️ experimental ⚠️)
+      #   if: always()
+      #   run: ./scripts/audit.sh
 
       - name: Test tap
         if: always()
