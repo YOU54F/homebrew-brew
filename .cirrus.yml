@@ -19,7 +19,7 @@ linux_arm64_task:
     memory: 12G
   setup_script: |
       apt-get update
-      apt-get install build-essential zlib-dev
+      apt-get install build-essential libz-dev
       git clone https://github.com/rbenv/rbenv.git ~/.rbenv
       echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
       source ~/.bashrc
