@@ -241,16 +241,16 @@ done
 
     write_homebrew_formulae
 
-    echo "⚗️  Sorting out the homebrew tap version... "
-    git checkout -b version/v$version
-    git add $FORMULAE_FILE
-    git commit -m "chore(release): Update version to v$version"
-    git push --set-upstream origin version/v$version
+    # echo "⚗️  Sorting out the homebrew tap version... "
+    # git checkout -b version/v$version
+    # git add $FORMULAE_FILE
+    # git commit -m "chore(release): Update version to v$version"
+    # git push --set-upstream origin version/v$version
 
-    echo "👏  Go and open that PR now:"
-    echo "🔗  $homepage/compare/master...version/v$version"
+    # echo "👏  Go and open that PR now:"
+    # echo "🔗  $homepage/compare/master...version/v$version"
 
-    hub pull-request --message "chore(release): Update version to v${version}"
+    # hub pull-request --message "chore(release): Update version to v${version}"
 
     echo "🎉 Done!"
 

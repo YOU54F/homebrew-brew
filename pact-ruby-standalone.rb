@@ -48,7 +48,7 @@ class PactRubyStandalone < Formula
       sha256 "94befa09a693527c89b357fad0328d088eb076a72b28ba97ab45d05d7c24980d"
       resource "pact_verifier_cli" do
           url "https://github.com/pact-foundation/pact-reference/releases/download/pact_verifier_cli-v0.10.5/pact_verifier_cli-linux-x86_64.gz"
-          sha256 "48a5d6bbc5471764e77027eaf42f62f812849b083e267be2cb8ed9d36cc862bf"
+          sha256 "8426c38ca361613bc4df649f14e40c9c3609672b56797e3c487aba2860c5040d"
       end
       resource "pact_mock_server_cli" do
           url "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v1.0.0/pact_mock_server_cli-linux-x86_64.gz"
