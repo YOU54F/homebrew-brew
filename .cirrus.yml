@@ -30,10 +30,10 @@ linux_arm64_task:
       eval "$(homebrew/bin/brew shellenv)"
       cd homebrew/
       rbenv global 2.6.8
-      brew update --force --quiet
-      cd ..
       export HOMEBREW_DEVELOPER=1
       export HOMEBREW_USE_RUBY_FROM_PATH=1
+      brew update --force --quiet
+      cd ..
       brew update --force --quiet
       brew doctor
       chmod -R go-w "$(brew --prefix)/share/zsh"
