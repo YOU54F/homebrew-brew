@@ -6,11 +6,11 @@ BUILD_TEST_TASK_TEMPLATE: &BUILD_TEST_TASK_TEMPLATE
   arch_check_script:
     - uname -am
   install_script:
-    - script/install.sh
+    - scripts/install.sh
   test_script:
-    - script/test.sh
+    - scripts/test.sh
   audit_script:
-    - script/audit.sh
+    - scripts/audit.sh
 
 linux_arm64_task: 
   arm_container:
