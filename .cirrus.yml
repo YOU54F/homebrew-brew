@@ -1,0 +1,48 @@
+env:
+  NODE_VERSION: '16'
+  PACT_BROKER_FEATURES: publish_pacts_using_old_api
+
+BUILD_TEST_TASK_TEMPLATE: &BUILD_TEST_TASK_TEMPLATE
+  arch_check_script:
+    - uname -am
+  install_script:
+    - script/install.sh
+  test_script:
+    - script/test.sh
+  audit_script:
+    - script/audit.sh
+
+linux_arm64_task: 
+  arm_container:
+    image: ruby:latest
+    cpu: 4
+    memory: 12G
+  setup_script: |
+      ruby --version
+      git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+      git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+      echo 'eval "$(~/.rbenv/bin/rbenv init - bash)"' >> ~/.bashrc
+      source ~/.bashrc
+      git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+      git -C "$(rbenv root)"/plugins/ruby-build pull
+      rbenv install --list-all
+      rbenv install 2.6.8
+      mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
+      eval "$(homebrew/bin/brew shellenv)"
+      cd homebrew/
+      rbenv local 2.6.8
+      cd ..
+      brew update --force --quiet
+      brew doctor
+      chmod -R go-w "$(brew --prefix)/share/zsh"
+      # export HOMEBREW_DEVELOPER=1
+      # export HOMEBREW_USE_RUBY_FROM_PATH=1
+  << : *BUILD_TEST_TASK_TEMPLATE
+
+macosx_arm64_task: 
+  macos_instance:
+    image: ghcr.io/cirruslabs/macos-ventura-base:latest
+  << : *BUILD_TEST_TASK_TEMPLATE
+
+
+
