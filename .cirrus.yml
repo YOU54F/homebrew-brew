@@ -14,7 +14,7 @@ BUILD_TEST_TASK_TEMPLATE: &BUILD_TEST_TASK_TEMPLATE
 
 linux_arm64_task: 
   arm_container:
-    image: ubuntu:22.04
+    image: ruby:2.6.8
     cpu: 4
     memory: 12G
   env:
@@ -23,21 +23,21 @@ linux_arm64_task:
       apt update -y
       apt install -y curl git
 
-      # Check out rbenv into ~/.rbenv
-      git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-      echo -e "\nexport PATH="$HOME/.rbenv/bin:$PATH"" >> ~/.bashrc
-      echo -e "\neval "$(rbenv init -)"" >> ~/.bashrc
-      eval "$(rbenv init -)"
-      source ~/.bashrc
-      git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-      #  See: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
-      apt update -y
-      apt install -y \
-        autoconf bison build-essential libssl-dev libyaml-dev libreadline-dev zlib1g-dev \
-        libncurses5-dev libffi-dev libgdbm-dev
-      rbenv install 2.6.8 --verbose
-      rbenv global 2.6.8
-      source ~/.bashrc
+      # # Check out rbenv into ~/.rbenv
+      # git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+      # echo -e "\nexport PATH="$HOME/.rbenv/bin:$PATH"" >> ~/.bashrc
+      # echo -e "\neval "$(rbenv init -)"" >> ~/.bashrc
+      # eval "$(rbenv init -)"
+      # source ~/.bashrc
+      # git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+      # #  See: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
+      # apt update -y
+      # apt install -y \
+      #   autoconf bison build-essential libssl-dev libyaml-dev libreadline-dev zlib1g-dev \
+      #   libncurses5-dev libffi-dev libgdbm-dev
+      # rbenv install 2.6.8 --verbose
+      # rbenv global 2.6.8
+      # source ~/.bashrc
 
       git clone --depth=1 https://github.com/Homebrew/brew /opt/homebrew
       echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bashrc
