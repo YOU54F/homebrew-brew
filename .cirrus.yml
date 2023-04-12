@@ -29,8 +29,8 @@ linux_arm64_task:
       eval "${String}"
       git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
       #  See: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
-      sudo apt update
-      sudo apt install -y \
+      apt update -y
+      apt install -y \
         autoconf bison build-essential libssl-dev libyaml-dev libreadline-dev zlib1g-dev \
         libncurses5-dev libffi-dev libgdbm-dev
       CONFIGURE_OPTS="--disable-install-doc --enable-shared" rbenv install 2.6.8 --verbose
