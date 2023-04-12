@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -eu
 # --------------------------------------------------------------------------------------------
 # Installs Ruby 2.6.8 using rbenv/ruby-build on the Raspberry Pi OS
 #
@@ -14,13 +14,13 @@ This will install Ruby 2.6 using rbenv/ruby-build.
 It will take about 2 hours to compile on the original Raspberry Pi,
 35 minutes on the second generation, and 16 minutes on the third.\n"
 
-# Prompt to continue
-read -p "  Continue? (y/n) " ans
-if [[ $ans != "y" ]]; then
-  echo -e "\nQuitting...\n"
-  exit
-fi
-echo
+# # Prompt to continue
+# read -p "  Continue? (y/n) " ans
+# if [[ $ans != "y" ]]; then
+#   echo -e "\nQuitting...\n"
+#   exit
+# fi
+# echo
 
 # Time the install process
 START_TIME=$SECONDS

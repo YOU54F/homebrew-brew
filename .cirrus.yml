@@ -20,30 +20,11 @@ linux_arm64_task:
   env:
     PATH: "$HOME/.rbenv/bin;/opt/homebrew/bin/brew:$PATH"
   setup_script: |
-      apt update -y
-      apt install -y curl git
-
-      # # Check out rbenv into ~/.rbenv
-      # git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-      # echo -e "\nexport PATH="$HOME/.rbenv/bin:$PATH"" >> ~/.bashrc
-      # echo -e "\neval "$(rbenv init -)"" >> ~/.bashrc
-      # eval "$(rbenv init -)"
-      # source ~/.bashrc
-      # git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-      # #  See: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
-      # apt update -y
-      # apt install -y \
-      #   autoconf bison build-essential libssl-dev libyaml-dev libreadline-dev zlib1g-dev \
-      #   libncurses5-dev libffi-dev libgdbm-dev
-      # rbenv install 2.6.8 --verbose
-      # rbenv global 2.6.8
-      # source ~/.bashrc
-
-      git clone --depth=1 https://github.com/Homebrew/brew /opt/homebrew
-      echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bashrc
-      eval "$(/opt/homebrew/bin/brew shellenv)"
-      source ~/.bashrc
-      brew update --force --verbose
+      DEBIAN_FRONTEND=noninteractive \
+      apt-get update \
+      && apt-get install -y git curl sudo ca-certificates \
+      && rm -rf /var/lib/apt/lists/*
+      curl -fsSL https://gist.githubusercontent.com/ryansch/ab306af869743643286a55c67c6866ab/raw/24d965a1e6be01a168c1dd62233502b519c4c6c7/install.sh | /bin/bash
       brew --version
 
   << : *BUILD_TEST_TASK_TEMPLATE

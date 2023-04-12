@@ -1,0 +1,14 @@
+FROM ruby:2.6.8
+
+RUN ruby --version
+
+RUN git clone --depth=1 https://github.com/Homebrew/brew /opt/homebrew
+# RUN echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bashrc
+# ENV PATH="$PATH:/opt/homebrew/bin/brew"
+ENV PATH="$PATH:/usr/local/bin/ruby"
+# ENV HOMEBREW_DEVELOPER=1
+# ENV HOMEBREW_USE_RUBY_FROM_PATH=1
+# ENV HOMEBREW_RUBY_PATH="/usr/local/bin/ruby"
+ENV PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH 
+RUN ruby --version && brew update --force --verbose
+RUN brew --version
