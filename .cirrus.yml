@@ -17,15 +17,17 @@ linux_arm64_task:
     image: ubuntu:22.04
     cpu: 4
     memory: 12G
+  env:
+    PATH: "$HOME/.rbenv/bin;/opt/homebrew/bin/brew:$PATH"
   setup_script: |
       apt update -y
       apt install -y curl git
-
 
       # Check out rbenv into ~/.rbenv
       git clone https://github.com/rbenv/rbenv.git ~/.rbenv
       echo -e "\nexport PATH="$HOME/.rbenv/bin:$PATH"" >> ~/.bashrc
       echo -e "\neval "$(rbenv init -)"" >> ~/.bashrc
+      eval "$(rbenv init -)"
       source ~/.bashrc
       git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
       #  See: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
@@ -39,6 +41,7 @@ linux_arm64_task:
 
       git clone --depth=1 https://github.com/Homebrew/brew /opt/homebrew
       echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bashrc
+      eval "$(/opt/homebrew/bin/brew shellenv)"
       source ~/.bashrc
       brew update --force --verbose
       brew --version
