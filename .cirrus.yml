@@ -19,7 +19,7 @@ linux_arm64_task:
     memory: 12G
   setup_script: |
       apt-get update --yes
-      apt-get install --yes build-essential libz-dev libreadline-dev git
+      apt-get install --yes build-essential libz-dev libreadline-dev git curl
       git clone https://github.com/rbenv/rbenv.git ~/.rbenv
       eval "$(~/.rbenv/bin/rbenv init - bash)"
       git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
