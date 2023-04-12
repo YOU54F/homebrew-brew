@@ -18,29 +18,26 @@ linux_arm64_task:
     cpu: 4
     memory: 12G
   setup_script: |
-      # Time the install process
-      START_TIME=$SECONDS
+      apt update -y
+      apt install -y curl git
+
+
       # Check out rbenv into ~/.rbenv
       git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-      # Add ~/.rbenv/bin to $PATH, enable shims and autocompletion
-      export PATH="$HOME/.rbenv/bin:$PATH"
-      eval "$(rbenv init -)"
-      echo -e "\n${String}" >> ~/.bashrc
-      eval "${String}"
+      echo -e "\nexport PATH="$HOME/.rbenv/bin:$PATH"" >> ~/.bashrc
+      echo -e "\neval "$(rbenv init -)"" >> ~/.bashrc
+      source ~/.bashrc
       git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
       #  See: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
       apt update -y
       apt install -y \
         autoconf bison build-essential libssl-dev libyaml-dev libreadline-dev zlib1g-dev \
         libncurses5-dev libffi-dev libgdbm-dev
-      CONFIGURE_OPTS="--disable-install-doc --enable-shared" rbenv install 2.6.8 --verbose
+      rbenv install 2.6.8 --verbose
       rbenv global 2.6.8
-      echo "gem: --no-document" > ~/.gemrc
-      ELAPSED_TIME=$(($SECONDS - $START_TIME))
-      echo -e "\nFinished in $(($ELAPSED_TIME/60/60)) hr, $(($ELAPSED_TIME/60%60)) min, and $(($ELAPSED_TIME%60)) sec\n"
       source ~/.bashrc
-      sudo git clone --depth=1 https://github.com/Homebrew/brew /opt/homebrew
-      sudo chown -R $(whoami) /opt/homebrew
+
+      git clone --depth=1 https://github.com/Homebrew/brew /opt/homebrew
       echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bashrc
       source ~/.bashrc
       brew update --force --verbose
