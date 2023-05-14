@@ -9,7 +9,7 @@ TOOL=${TOOL:-pact-ruby-standalone}
 formulaes=$(cd Formula && ls -1 $TOOL*)
 echo $formulaes
 TEST_RESULT_FILE=TEST_RESULTS_$TOOL.md
-[ -f $TEST_RESULT_FILE ]; rm $TEST_RESULT_FILE
+[ -f $TEST_RESULT_FILE ] && rm $TEST_RESULT_FILE
 echo "| formula | version | platform | arch | result |" >> $TEST_RESULT_FILE
 echo "| ------- | ------- | -------- | ---- | ------ |" >> $TEST_RESULT_FILE
 
