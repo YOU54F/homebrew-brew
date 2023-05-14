@@ -36,7 +36,6 @@ class PactRubyStandalone200 < Formula
     puts "# Run 'pact-broker --help'"
     puts "# Run 'pact-message --help'"
     puts "# Run 'pact-mock-service --help'"
-    puts "# Run 'plugin-cli --help'"
     puts "# Run 'pact-provider-verifier --help'"
     puts "# Run 'pact-stub-service --help'"
     puts "# Run 'pactflow --help'"
