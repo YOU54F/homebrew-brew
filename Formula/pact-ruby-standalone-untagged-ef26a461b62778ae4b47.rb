@@ -18,7 +18,7 @@ class PactRubyStandaloneUntaggedEf26a461b62778ae4b47 < Formula
     if Hardware::CPU.is_64_bit?
       on_intel do
         url "https://github.com/pact-foundation/pact-ruby-standalone/releases/download/untagged-ef26a461b62778ae4b47/pact-0.0.1-1-linux-x86_64.tar.gz"
-        sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+        sha256 "1c0d14f8bca895902969b384951f795bde15484fb0956adff6f92bca3babdb16"
       end
     end
    if Hardware::CPU.is_32_bit?

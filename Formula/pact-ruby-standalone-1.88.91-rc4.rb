@@ -1,4 +1,4 @@
-class PactRubyStandalone18891-rc4 < Formula
+class PactRubyStandalone18891Rc4 < Formula
   desc "Standalone pact CLI executable using the Ruby Pact impl and Travelling Ruby"
   homepage "https://github.com/pact-foundation/pact-ruby-standalone"
   version "1.88.91-rc4"

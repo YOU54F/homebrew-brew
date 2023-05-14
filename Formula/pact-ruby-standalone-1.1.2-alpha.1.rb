@@ -1,4 +1,4 @@
-class PactRubyStandalone112-alpha < Formula
+class PactRubyStandalone112Alpha1 < Formula
   desc "Standalone pact CLI executable using the Ruby Pact impl and Travelling Ruby"
   homepage "https://github.com/pact-foundation/pact-ruby-standalone"
   version "1.1.2-alpha.1"
