@@ -40,7 +40,6 @@ class PactRubyStandalone001 < Formula
     puts "# Run 'pact-mock-service --help'"
     puts "# Run 'pact-provider-verifier --help'"
     puts "# Run 'pact-stub-service --help'"
-    puts "# Run 'pactflow --help'"
     on_macos do
       on_arm do
         puts "# Rosetta is required to run pact-ruby-standalone commands"
@@ -56,7 +55,5 @@ class PactRubyStandalone001 < Formula
     system "#{bin}/pact-mock-service", "--help"
     system "#{bin}/pact-provider-verifier", "--help"
     system "#{bin}/pact-stub-service", "--help"
-    system "#{bin}/pactflow", "--help"
-
   end
 end
