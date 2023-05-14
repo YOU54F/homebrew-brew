@@ -1,0 +1,77 @@
+name: Test FFI versions
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: test
+    strategy:
+      matrix:
+        os: [macOS-latest,ubuntu-latest]
+        Formula: [
+          libpact_ffi-0.0.0,
+          libpact_ffi-0.0.1,
+          libpact_ffi-0.0.2,
+          libpact_ffi-0.0.3,
+          libpact_ffi-0.1.0,
+          libpact_ffi-0.1.1,
+          libpact_ffi-0.1.2,
+          libpact_ffi-0.1.3,
+          libpact_ffi-0.1.4,
+          libpact_ffi-0.1.5,
+          libpact_ffi-0.1.6,
+          libpact_ffi-0.2.0,
+          libpact_ffi-0.2.1,
+          libpact_ffi-0.2.2,
+          libpact_ffi-0.2.3,
+          libpact_ffi-0.2.4,
+          libpact_ffi-0.2.5,
+          libpact_ffi-0.2.6,
+          libpact_ffi-0.3.0,
+          libpact_ffi-0.3.1,
+          libpact_ffi-0.3.10,
+          libpact_ffi-0.3.11,
+          libpact_ffi-0.3.12,
+          libpact_ffi-0.3.13,
+          libpact_ffi-0.3.14,
+          libpact_ffi-0.3.15,
+          libpact_ffi-0.3.16,
+          libpact_ffi-0.3.18,
+          libpact_ffi-0.3.19,
+          libpact_ffi-0.3.2,
+          libpact_ffi-0.3.3,
+          libpact_ffi-0.3.4,
+          libpact_ffi-0.3.5,
+          libpact_ffi-0.3.6,
+          libpact_ffi-0.3.7,
+          libpact_ffi-0.3.8,
+          libpact_ffi-0.3.9,
+          libpact_ffi-0.4.0,
+          libpact_ffi-0.4.1,
+          libpact_ffi-0.4.2,
+          libpact_ffi-0.4.3,
+          libpact_ffi-0.4.4,
+          libpact_ffi
+        ]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: install homebrew
+        run: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          echo "/home/linuxbrew/.linuxbrew/bin" >> $GITHUB_PATH
+        if: ${{ runner.os == 'Linux' }}
+
+      - name: Install tap
+        run: |
+          brew install Formula/${{ matrix.Formula }}.rb
+
+      - name: Brew test tap
+        run: |
+          brew test ${{ matrix.Formula }}
