@@ -5,12 +5,13 @@ set -e
 # pact_mock_server_cli
 # libpact_ffi
 # pact-ruby-standlone
-TOOL=pact-ruby-standalone
+TOOL=${TOOL:-pact-ruby-standalone}
 formulaes=$(cd Formula && ls -1 $TOOL*)
 echo $formulaes
-rm TEST_RESULTS.md
-echo "| formula | version | result |" >> TEST_RESULTS.md
-echo "| ------- | ------- | ------ |" >> TEST_RESULTS.md
+TEST_RESULT_FILE=TEST_RESULTS_$TOOL.md
+[ -f $TEST_RESULT_FILE ]; rm $TEST_RESULT_FILE
+echo "| formula | version | platform | arch | result |" >> $TEST_RESULT_FILE
+echo "| ------- | ------- | -------- | ---- | ------ |" >> $TEST_RESULT_FILE
 
 for formula in ${formulaes[@]}; do
   # echo https://github.com/pact-foundation/pact-reference/releases/tag/$tag
@@ -20,7 +21,10 @@ for formula in ${formulaes[@]}; do
   if [[ "$version" == 'foobar' ]]; then
       echo skipping as version broken = $version
   else
-     ./scripts/test_formula.sh $formula $version
+     ./scripts/test_formula.sh $formula $version $TEST_RESULT_FILE
   fi     
 done
 
+git add $TEST_RESULT_FILE
+git commit -m "ci(test): [skip ci] add $TEST_RESULT_FILE"
+git push
