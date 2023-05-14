@@ -28,6 +28,18 @@ write_homebrew_formulae() {
         : > "$FORMULAE_FILE"
     fi
 
+    if [[ $MAJOR_TAG -eq 0 && $MINOR_TAG -lt 8 ]]; then
+        filename_linux_x64=$TOOL_NAME-v$version/$TOOL_NAME-linux-x86_64-$version.gz
+    else
+        filename_macos_arm=$TOOL_NAME-v$version/$TOOL_NAME-osx-aarch64.gz
+        filename_macos_x64=$TOOL_NAME-v$version/$TOOL_NAME-osx-x86_64.gz
+        filename_linux_arm=$TOOL_NAME-v$version/$TOOL_NAME-linux-aarch64.gz
+        filename_linux_x64=$TOOL_NAME-v$version/$TOOL_NAME-linux-x86_64.gz
+    fi
+
+
+
+
      exec 3<> $FORMULAE_FILE
         echo "class $FORMULA_NAME < Formula" >&3
         echo "  desc \"$DESCRIPTION\"" >&3

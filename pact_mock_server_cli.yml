@@ -1,0 +1,57 @@
+name: pact_mock_server_cli
+homepage: https://github.com/pact-foundation/pact-reference/
+latest: 1.0.0
+release: 
+  url: $homepagereleases/tag/$name-v$version
+  tag: $name-v$version
+  example: 
+    url: https://github.com/pact-foundation/pact-reference/releases/tag/pact_mock_server_cli-v1.0.0
+    tag: pact_mock_server_cli-v1.0.0
+  archive:
+    type: gz
+    checksums:
+      type: sha256
+      version_from: 0.7.4
+      exclude:
+        windows:
+          x64:
+            version: 0.7.4
+platforms:
+  macos:
+    x64:
+      arch_identifier: x86_64
+      # exclude:
+      #   versions:
+      #   - example_version_to_skip
+      downloads: 
+          - name: $name-$platform-$arch
+            ext: gz
+            example: pact_mock_server_cli-osx-x86_64.gz
+            version_from: 0.6.1
+  linux:
+    x64:
+      arch_identifier: aarch64
+      downloads: 
+          - name: $platform-$arch-$version
+            ext: gz
+            example: pact_mock_server_cli-linux-x86_64-0.0.0.gz
+            version_from: 0.0.0
+          - name: $platform-$arch
+            ext: gz
+            example: pact_mock_server_cli-linux-x86_64.gz
+            version_from: 0.6.1
+    arm64:
+      arch_identifier: aarch64
+      downloads: 
+          - name: $platform-$arch
+            ext: gz
+            example: pact_mock_server_cli-linux-aarch64.gz
+            version_from: 0.7.8
+  windows:
+    x64:
+      arch_identifier: x86_64
+      downloads: 
+          - name: $name-$platform-$arch
+            ext: gz
+            example: pact_mock_server_cli-windows-x86_64.exe.gz
+            version_from: 0.6.1

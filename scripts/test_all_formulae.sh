@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 # pact_verifier_cli
@@ -6,6 +6,7 @@ set -e
 # libpact_ffi
 # pact-ruby-standlone
 TOOL=${TOOL:-pact-ruby-standalone}
+ls -1 Formula/$TOOL*
 formulaes=$(cd Formula && ls -1 $TOOL*)
 echo $formulaes
 TEST_RESULT_FILE=TEST_RESULTS_$TOOL.md
@@ -15,6 +16,8 @@ echo "| ------- | ------- | -------- | ---- | ------ |" >> $TEST_RESULT_FILE
 
 for formula in ${formulaes[@]}; do
   # echo https://github.com/pact-foundation/pact-reference/releases/tag/$tag
+  echo "formula is $formula"
+  echo "TOOL is $TOOL"
   version=${formula#$TOOL-} # 2.0.0.rb
   version=${version%.rb} # 2.0.0
   echo creating formula $formula \\nversion: $version

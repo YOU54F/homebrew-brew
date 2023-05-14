@@ -1,0 +1,61 @@
+{
+  "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/35976488",
+  "assets": [
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/30273659",
+      "contentType": "binary/octet-stream",
+      "createdAt": "2021-01-05T02:24:15Z",
+      "downloadCount": 18,
+      "id": "MDEyOlJlbGVhc2VBc3NldDMwMjczNjU5",
+      "label": "",
+      "name": "pact_mock_server_cli-linux-x86_64.gz",
+      "size": 7214904,
+      "state": "uploaded",
+      "updatedAt": "2021-01-05T02:24:16Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.3/pact_mock_server_cli-linux-x86_64.gz"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/30273735",
+      "contentType": "binary/octet-stream",
+      "createdAt": "2021-01-05T02:26:34Z",
+      "downloadCount": 15,
+      "id": "MDEyOlJlbGVhc2VBc3NldDMwMjczNzM1",
+      "label": "",
+      "name": "pact_mock_server_cli-osx-x86_64.gz",
+      "size": 5684318,
+      "state": "uploaded",
+      "updatedAt": "2021-01-05T02:26:34Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.3/pact_mock_server_cli-osx-x86_64.gz"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/30273834",
+      "contentType": "binary/octet-stream",
+      "createdAt": "2021-01-05T02:31:27Z",
+      "downloadCount": 1,
+      "id": "MDEyOlJlbGVhc2VBc3NldDMwMjczODM0",
+      "label": "",
+      "name": "pact_mock_server_cli-windows-x86_64.exe.gz",
+      "size": 5088722,
+      "state": "uploaded",
+      "updatedAt": "2021-01-05T02:31:27Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.3/pact_mock_server_cli-windows-x86_64.exe.gz"
+    }
+  ],
+  "author": {
+    "id": "MDQ6VXNlcjg2MzY2Ng==",
+    "login": "uglyog"
+  },
+  "body": "## Add TLS (self-signed) option\r\n\r\n* fix: pinning version of webmachine until reqwest is updated \r\n* feat: add self-signed tls option to mockserver cli (to test TLS with Tokio 1.0)\r\n",
+  "createdAt": "2021-01-05T02:10:41Z",
+  "id": "MDc6UmVsZWFzZTM1OTc2NDg4",
+  "isDraft": false,
+  "isPrerelease": false,
+  "name": "Pact Mock Server Standalone v0.7.3",
+  "publishedAt": "2021-01-05T02:15:33Z",
+  "tagName": "pact_mock_server_cli-v0.7.3",
+  "tarballUrl": "https://api.github.com/repos/pact-foundation/pact-reference/tarball/pact_mock_server_cli-v0.7.3",
+  "targetCommitish": "master",
+  "uploadUrl": "https://uploads.github.com/repos/pact-foundation/pact-reference/releases/35976488/assets{?name,label}",
+  "url": "https://github.com/pact-foundation/pact-reference/releases/tag/pact_mock_server_cli-v0.7.3",
+  "zipballUrl": "https://api.github.com/repos/pact-foundation/pact-reference/zipball/pact_mock_server_cli-v0.7.3"
+}

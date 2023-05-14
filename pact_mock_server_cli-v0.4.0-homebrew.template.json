@@ -1,0 +1,8 @@
+{
+  "name": "Pact Mock Server Standalone v0.4.0",
+  "on_macos": {
+    "on_intel": {},
+    "on_arm": {}
+  },
+  "on_linux": {}
+}

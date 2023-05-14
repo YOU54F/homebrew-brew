@@ -1,0 +1,10 @@
+{
+  "name": "Pact Mock Server Standalone v0.0.1",
+  "on_macos": {
+    "on_intel": {
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.0.1/pact_mock_server_cli-osx-x86_64-0.0.1.gz"
+    },
+    "on_arm": {}
+  },
+  "on_linux": {}
+}

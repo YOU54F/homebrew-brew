@@ -1,0 +1,74 @@
+{
+  "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/3644442",
+  "assets": [
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/1999664",
+      "contentType": "application/x-gzip",
+      "createdAt": "2016-07-16T08:37:09Z",
+      "downloadCount": 6,
+      "id": "MDEyOlJlbGVhc2VBc3NldDE5OTk2NjQ=",
+      "label": "",
+      "name": "pact_mock_server_cli-ios-x86_64-0.2.0.gz",
+      "size": 1695203,
+      "state": "uploaded",
+      "updatedAt": "2016-07-16T08:37:48Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.2.0/pact_mock_server_cli-ios-x86_64-0.2.0.gz"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/1981199",
+      "contentType": "application/gzip",
+      "createdAt": "2016-07-13T04:28:04Z",
+      "downloadCount": 9,
+      "id": "MDEyOlJlbGVhc2VBc3NldDE5ODExOTk=",
+      "label": "",
+      "name": "pact_mock_server_cli-linux-x86_64-0.2.0.gz",
+      "size": 1882745,
+      "state": "uploaded",
+      "updatedAt": "2016-07-13T04:28:11Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.2.0/pact_mock_server_cli-linux-x86_64-0.2.0.gz"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/1999659",
+      "contentType": "application/x-gzip",
+      "createdAt": "2016-07-16T08:36:26Z",
+      "downloadCount": 5,
+      "id": "MDEyOlJlbGVhc2VBc3NldDE5OTk2NTk=",
+      "label": "",
+      "name": "pact_mock_server_cli-osx-x86_64-0.2.0.gz",
+      "size": 1723971,
+      "state": "uploaded",
+      "updatedAt": "2016-07-16T08:37:48Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.2.0/pact_mock_server_cli-osx-x86_64-0.2.0.gz"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/1981218",
+      "contentType": "application/x-gzip",
+      "createdAt": "2016-07-13T04:39:35Z",
+      "downloadCount": 5,
+      "id": "MDEyOlJlbGVhc2VBc3NldDE5ODEyMTg=",
+      "label": "",
+      "name": "pact_mock_server_cli-windows-x86_64-0.2.0.exe.gz",
+      "size": 2722603,
+      "state": "uploaded",
+      "updatedAt": "2016-07-13T04:39:47Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.2.0/pact_mock_server_cli-windows-x86_64-0.2.0.exe.gz"
+    }
+  ],
+  "author": {
+    "id": "MDQ6VXNlcjg2MzY2Ng==",
+    "login": "uglyog"
+  },
+  "body": "# V2 Specification Implementation\n",
+  "createdAt": "2016-07-13T04:22:15Z",
+  "id": "MDc6UmVsZWFzZTM2NDQ0NDI=",
+  "isDraft": false,
+  "isPrerelease": false,
+  "name": "Pact Mock Server Standalone v0.2.0",
+  "publishedAt": "2016-07-13T04:28:56Z",
+  "tagName": "pact_mock_server_cli-v0.2.0",
+  "tarballUrl": "https://api.github.com/repos/pact-foundation/pact-reference/tarball/pact_mock_server_cli-v0.2.0",
+  "targetCommitish": "master",
+  "uploadUrl": "https://uploads.github.com/repos/pact-foundation/pact-reference/releases/3644442/assets{?name,label}",
+  "url": "https://github.com/pact-foundation/pact-reference/releases/tag/pact_mock_server_cli-v0.2.0",
+  "zipballUrl": "https://api.github.com/repos/pact-foundation/pact-reference/zipball/pact_mock_server_cli-v0.2.0"
+}

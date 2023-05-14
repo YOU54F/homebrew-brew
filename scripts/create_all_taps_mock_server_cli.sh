@@ -15,6 +15,18 @@ for tag in ${tags[@]}; do
   fi     
 done
 
+# https://github.com/pact-foundation/pact-reference/releases/tag/pact_mock_server_cli-v0.6.0
+# pact_mock_server_cli
+# All builds prior have the version number appended
+
+
+# https://github.com/pact-foundation/pact-reference/releases/tag/pact_mock_server_cli-v0.6.1
+# May 27, 2020  MacOS & Windows builds added
+# pact_mock_server_cli-linux-x86_64.gz
+# pact_mock_server_cli-osx-x86_64.gz
+# pact_mock_server_cli-windows-x86_64.exe.gz
+
+
 ## https://github.com/pact-foundation/pact-reference/releases/tag/pact_mock_server_cli-v0.7.4
 ## Checksums added except for windows
 # pact_mock_server_cli-linux-x86_64.gz.sha256

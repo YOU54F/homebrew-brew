@@ -1,0 +1,48 @@
+{
+  "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/6159444",
+  "assets": [
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/3717620",
+      "contentType": "application/gzip",
+      "createdAt": "2017-04-23T07:40:04Z",
+      "downloadCount": 12,
+      "id": "MDEyOlJlbGVhc2VBc3NldDM3MTc2MjA=",
+      "label": "",
+      "name": "pact_mock_server_cli-linux-x86_64-0.2.3.gz",
+      "size": 2443507,
+      "state": "uploaded",
+      "updatedAt": "2017-04-23T07:40:30Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.2.3/pact_mock_server_cli-linux-x86_64-0.2.3.gz"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/3717929",
+      "contentType": "application/x-gzip",
+      "createdAt": "2017-04-23T10:07:26Z",
+      "downloadCount": 8,
+      "id": "MDEyOlJlbGVhc2VBc3NldDM3MTc5Mjk=",
+      "label": "",
+      "name": "pact_mock_server_cli-osx-x86_64-0.2.3.gz",
+      "size": 1624505,
+      "state": "uploaded",
+      "updatedAt": "2017-04-23T10:07:47Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.2.3/pact_mock_server_cli-osx-x86_64-0.2.3.gz"
+    }
+  ],
+  "author": {
+    "id": "MDQ6VXNlcjg2MzY2Ng==",
+    "login": "uglyog"
+  },
+  "body": "This fixes the issue with running the mock server where there is only a simple console.\r\n\r\n* Change no-console-log to no-term-log and use a simple logger if it is set #6",
+  "createdAt": "2017-04-23T07:35:51Z",
+  "id": "MDc6UmVsZWFzZTYxNTk0NDQ=",
+  "isDraft": false,
+  "isPrerelease": false,
+  "name": "Pact Mock Server Standalone v0.2.3",
+  "publishedAt": "2017-04-23T07:40:32Z",
+  "tagName": "pact_mock_server_cli-v0.2.3",
+  "tarballUrl": "https://api.github.com/repos/pact-foundation/pact-reference/tarball/pact_mock_server_cli-v0.2.3",
+  "targetCommitish": "master",
+  "uploadUrl": "https://uploads.github.com/repos/pact-foundation/pact-reference/releases/6159444/assets{?name,label}",
+  "url": "https://github.com/pact-foundation/pact-reference/releases/tag/pact_mock_server_cli-v0.2.3",
+  "zipballUrl": "https://api.github.com/repos/pact-foundation/pact-reference/zipball/pact_mock_server_cli-v0.2.3"
+}

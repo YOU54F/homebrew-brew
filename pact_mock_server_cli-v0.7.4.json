@@ -1,0 +1,87 @@
+{
+  "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/43815301",
+  "assets": [
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/37780784",
+      "contentType": "binary/octet-stream",
+      "createdAt": "2021-05-30T08:17:00Z",
+      "downloadCount": 22,
+      "id": "MDEyOlJlbGVhc2VBc3NldDM3NzgwNzg0",
+      "label": "",
+      "name": "pact_mock_server_cli-linux-x86_64.gz",
+      "size": 6615464,
+      "state": "uploaded",
+      "updatedAt": "2021-05-30T08:17:05Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.4/pact_mock_server_cli-linux-x86_64.gz"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/37780787",
+      "contentType": "binary/octet-stream",
+      "createdAt": "2021-05-30T08:17:05Z",
+      "downloadCount": 19,
+      "id": "MDEyOlJlbGVhc2VBc3NldDM3NzgwNzg3",
+      "label": "",
+      "name": "pact_mock_server_cli-linux-x86_64.gz.sha256",
+      "size": 123,
+      "state": "uploaded",
+      "updatedAt": "2021-05-30T08:17:05Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.4/pact_mock_server_cli-linux-x86_64.gz.sha256"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/37780864",
+      "contentType": "binary/octet-stream",
+      "createdAt": "2021-05-30T08:22:11Z",
+      "downloadCount": 21,
+      "id": "MDEyOlJlbGVhc2VBc3NldDM3NzgwODY0",
+      "label": "",
+      "name": "pact_mock_server_cli-osx-x86_64.gz",
+      "size": 5118945,
+      "state": "uploaded",
+      "updatedAt": "2021-05-30T08:22:12Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.4/pact_mock_server_cli-osx-x86_64.gz"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/37780865",
+      "contentType": "binary/octet-stream",
+      "createdAt": "2021-05-30T08:22:12Z",
+      "downloadCount": 19,
+      "id": "MDEyOlJlbGVhc2VBc3NldDM3NzgwODY1",
+      "label": "",
+      "name": "pact_mock_server_cli-osx-x86_64.gz.sha256",
+      "size": 121,
+      "state": "uploaded",
+      "updatedAt": "2021-05-30T08:22:12Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.4/pact_mock_server_cli-osx-x86_64.gz.sha256"
+    },
+    {
+      "apiUrl": "https://api.github.com/repos/pact-foundation/pact-reference/releases/assets/37780839",
+      "contentType": "binary/octet-stream",
+      "createdAt": "2021-05-30T08:20:26Z",
+      "downloadCount": 2,
+      "id": "MDEyOlJlbGVhc2VBc3NldDM3NzgwODM5",
+      "label": "",
+      "name": "pact_mock_server_cli-windows-x86_64.exe.gz",
+      "size": 130,
+      "state": "uploaded",
+      "updatedAt": "2021-05-30T08:20:26Z",
+      "url": "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.4/pact_mock_server_cli-windows-x86_64.exe.gz"
+    }
+  ],
+  "author": {
+    "id": "MDQ6VXNlcjg2MzY2Ng==",
+    "login": "uglyog"
+  },
+  "body": "## Upgraded crates + V4 features\r\n\r\n* chore: add shasums to all release artifacts (Matt Fellows)\r\n* feat(V4): added synchronous request/response message formats\r\n* feat(V4): Updated consumer DSL to set comments + mock server initial support for V4 pacts\r\n* refactor: move the PactSpecification enum to the pact_models crate\r\n* feat: added read locks and a mutex guard to reading and writing pacts\r\n* refactor: use bytes crate instead of vector of bytes for body content\r\n* fix: add callback timeout option for verifcation callbacks\r\n* chore: upgrade maplit, itertools (Audun Halland)\r\n* chore: upgrade rand, rand_regex (Audun Halland)\r\n* chore: upgrade expectest to 0.12 (Audun Halland)\r\n* chore: upgrade regex, chrono-tz (Audun Halland)\r\n* chore: upgrade simplelog (Audun Halland)\r\n* chore: upgrade quickcheck (Audun Halland)\r\n* chore: upgrade http to get rid of bytes 0.5.6 (Audun Halland)\r\n* chore: Upgrade reqwest to 0.11 and hence tokio to 1.0\r\n* chore: add apt clean to docker file\r\n",
+  "createdAt": "2021-05-30T08:05:29Z",
+  "id": "MDc6UmVsZWFzZTQzODE1MzAx",
+  "isDraft": false,
+  "isPrerelease": false,
+  "name": "Pact Mock Server Standalone v0.7.4",
+  "publishedAt": "2021-05-30T08:09:46Z",
+  "tagName": "pact_mock_server_cli-v0.7.4",
+  "tarballUrl": "https://api.github.com/repos/pact-foundation/pact-reference/tarball/pact_mock_server_cli-v0.7.4",
+  "targetCommitish": "master",
+  "uploadUrl": "https://uploads.github.com/repos/pact-foundation/pact-reference/releases/43815301/assets{?name,label}",
+  "url": "https://github.com/pact-foundation/pact-reference/releases/tag/pact_mock_server_cli-v0.7.4",
+  "zipballUrl": "https://api.github.com/repos/pact-foundation/pact-reference/zipball/pact_mock_server_cli-v0.7.4"
+}
