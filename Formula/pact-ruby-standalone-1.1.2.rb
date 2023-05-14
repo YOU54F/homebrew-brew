@@ -34,7 +34,6 @@ class PactRubyStandalone112 < Formula
     bin.install Dir["bin/*"]
     lib.install Dir["lib/*"]
     puts "# (see https://github.com/pact-foundation/pact-ruby-standalone/releases/)'"
-    puts "# Run 'pact --help'"
     puts "# Run 'pact-broker --help'"
     puts "# Run 'pact-mock-service --help'"
     puts "# Run 'pact-provider-verifier --help'"
@@ -42,7 +41,6 @@ class PactRubyStandalone112 < Formula
   end
 
   test do
-    system "#{bin}/pact", "--help"
     system "#{bin}/pact-broker", "--help"
     system "#{bin}/pact-mock-service", "--help"
     system "#{bin}/pact-provider-verifier", "--help"
