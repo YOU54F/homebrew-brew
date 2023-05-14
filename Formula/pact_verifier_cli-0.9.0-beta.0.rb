@@ -33,6 +33,6 @@ class PactVerifierCli090-beta < Formula
   end
 
   test do
-    system "#{bin}/pact_verifier_cli", "help"
+    system "#{bin}/pact_verifier_cli", "--help"
   end
 end

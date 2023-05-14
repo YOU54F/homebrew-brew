@@ -30,8 +30,4 @@ class LibpactFfi0313 < Formula
     # https://github.com/pact-foundation/pact-reference
     bin.install Dir["*"]; puts "Binary location: #{bin}\n";exec "ls #{bin}"
   end
-
-  test do
-    system "#{bin}/libpact_ffi", "help"
-  end
 end

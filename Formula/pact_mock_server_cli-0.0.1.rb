@@ -33,6 +33,6 @@ class PactMockServerCli001 < Formula
   end
 
   test do
-    system "#{bin}/pact_mock_server_cli", "help"
+    system "#{bin}/pact_mock_server_cli", "--help"
   end
 end

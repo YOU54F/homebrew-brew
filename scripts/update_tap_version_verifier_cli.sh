@@ -85,7 +85,7 @@ write_homebrew_formulae() {
         echo "  end" >&3
         echo "" >&3
         echo "  test do" >&3
-        echo "    system \"#{bin}/$TOOL_NAME\", \"help\"" >&3
+        echo "    system \"#{bin}/$TOOL_NAME\", \"--help\"" >&3
         echo "  end" >&3
         echo "end" >&3
     exec 3>&-

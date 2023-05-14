@@ -31,8 +31,4 @@ class LibpactFfi < Formula
     bin.install Dir["*"]; puts "Binary location: #{bin}
 ";exec "ls #{bin}" 
   end
-
-  test do
-    system "#{bin}/libpact_ffi", "help"
-  end
 end

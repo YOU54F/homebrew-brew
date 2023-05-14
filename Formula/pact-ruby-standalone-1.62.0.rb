@@ -45,14 +45,14 @@ class PactRubyStandalone1620 < Formula
   end
 
   test do
-    system "#{bin}/pact", "help"
-    system "#{bin}/pact-broker", "help"
-    system "#{bin}/pact-message", "help"
-    system "#{bin}/pact-mock-service", "help"
-    system "#{bin}/pact-plugin-cli", "help"
-    system "#{bin}/pact-provider-verifier", "help"
-    system "#{bin}/pact-stub-service", "help"
-    system "#{bin}/pactflow", "help"
+    system "#{bin}/pact", "--help"
+    system "#{bin}/pact-broker", "--help"
+    system "#{bin}/pact-message", "--help"
+    system "#{bin}/pact-mock-service", "--help"
+    system "#{bin}/pact-plugin-cli", "--help"
+    system "#{bin}/pact-provider-verifier", "--help"
+    system "#{bin}/pact-stub-service", "--help"
+    system "#{bin}/pactflow", "--help"
 
   end
 end

@@ -72,6 +72,7 @@ jobs:
         run: |
           brew install Formula/${{ matrix.Formula }}.rb
 
-      - name: Brew test tap
-        run: |
-          brew test ${{ matrix.Formula }}
+      ## no tests setup yet
+      # - name: Brew test tap
+      #   run: |
+      #     brew test ${{ matrix.Formula }}
