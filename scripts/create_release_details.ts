@@ -78,42 +78,69 @@ releases.forEach(async (release) => {
   const homebrewDetail = {
     name: detail.name,
 
-    on_macos: {
-      on_intel: {
-        url:
-          detail.assets
+    ...(detail.assets
+      .filter((a) => a.url.includes('osx-x86_64'))
+      .map((d) => d.url)[0] && {
+      on_macos: {
+        ...(detail.assets
+          .filter((a) => a.url.includes('osx-x86_64'))
+          .map((d) => d.url)[0] && {
+          on_intel: {
+            url: detail.assets
+              .filter((a) => a.url.includes('osx-x86_64'))
+              .map((d) => d.url)[0],
+            sha256: undefined
+          }
+        }),
+        ...((detail.assets
+          .filter((a) => a.url.includes('osx-aarch64'))
+          .map((d) => d.url)[0] && {
+          on_arm: {
+            url: detail.assets
+              .filter((a) => a.url.includes('osx-aarch64'))
+              .map((d) => d.url)[0],
+            sha256: undefined
+          }
+        }) ?? {
+          ...(detail.assets
             .filter((a) => a.url.includes('osx-x86_64'))
-            .map((d) => d.url)[0] ?? undefined,
-        sha256: undefined
-      },
-      on_arm: {
-        url:
-          detail.assets
-            .filter((a) => a.url.includes('osx-aarch64'))
-            .map((d) => d.url)[0] ?? undefined,
-        sha256: undefined
+            .map((d) => d.url)[0] && {
+            on_arm: {
+              url: detail.assets
+                .filter((a) => a.url.includes('osx-x86_64'))
+                .map((d) => d.url)[0],
+              sha256: undefined
+            }
+          })
+        })
       }
-    },
-    on_linux: {
-      on_intel: () => {
-        return {
-          url:
-            detail.assets
+    }),
+    ...(detail.assets
+      .filter((a) => a.url.includes('linux-x86_64'))
+      .map((d) => d.url)[0] && {
+      on_linux: {
+        ...(detail.assets
+          .filter((a) => a.url.includes('linux-x86_64'))
+          .map((d) => d.url)[0] && {
+          on_intel: {
+            url: detail.assets
               .filter((a) => a.url.includes('linux-x86_64'))
-              .map((d) => d.url)[0] ?? undefined,
-          sha256: undefined
-        };
-      },
-      on_arm: () => {
-        return {
-          url:
-            detail.assets
+              .map((d) => d.url)[0],
+            sha256: undefined
+          }
+        }),
+        ...(detail.assets
+          .filter((a) => a.url.includes('linux-aarch64'))
+          .map((d) => d.url)[0] && {
+          on_arm: {
+            url: detail.assets
               .filter((a) => a.url.includes('linux-aarch64'))
-              .map((d) => d.url)[0] ?? undefined,
-          sha256: undefined
-        };
+              .map((d) => d.url)[0],
+            sha256: undefined
+          }
+        })
       }
-    }
+    })
   };
 
   console.log(homebrewDetail);
