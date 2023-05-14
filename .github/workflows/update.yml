@@ -23,6 +23,9 @@ jobs:
       - name: Run update script
         run: |
           ./scripts/update_tap_version.sh ${{ github.event.client_payload.version }}
+
+      - name: Create PR with updated tap
+        run: |
+          ./scripts/create_updated_tap_pr.sh ${{ github.event.client_payload.version }}
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          CREATE_PR: true

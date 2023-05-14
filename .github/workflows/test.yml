@@ -25,10 +25,8 @@ jobs:
 
       - name: Install tap
         run: |
-          brew tap pact-foundation/pact-ruby-standalone
-          cd $(brew --prefix)/Homebrew/Library/Taps/pact-foundation/homebrew-pact-ruby-standalone/
-          hub checkout ${{ github.sha }}
-          brew install --verbose --debug pact-ruby-standalone
+          brew tap you54f/pact
+          brew install you54f/pact/pact-ruby-standalone
 
       - name: Brew test tap
         run: |
@@ -48,5 +46,5 @@ jobs:
 
       - name: Audit tap (⚠️ experimental ⚠️) - so we ignore the error code 
         run: |
-          brew audit --strict --online pact-ruby-standalone || true
+          brew audit --strict --online pact-ruby-standalone-2.2.1 || true
 
