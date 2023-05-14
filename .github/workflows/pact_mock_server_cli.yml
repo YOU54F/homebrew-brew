@@ -1,7 +1,7 @@
 name: Test mock_server_cli versions
 
 on:
-  push:
+  # push:
   workflow_dispatch:
 
 jobs:

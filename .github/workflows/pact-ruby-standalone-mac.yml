@@ -1,4 +1,4 @@
-name: Test pact-ruby-standalone versions
+name: Test pact-ruby-standalone macos versions
 
 on:
   push:
@@ -9,7 +9,7 @@ jobs:
     name: test
     strategy:
       matrix:
-        os: [macOS-latest,ubuntu-latest]
+        os: [macOS-latest]
         Formula: [
           pact-ruby-standalone-0.0.1,
           pact-ruby-standalone-1.0.0,

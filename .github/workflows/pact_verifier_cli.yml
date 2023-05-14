@@ -62,7 +62,7 @@ jobs:
 
       - name: Install tap
         run: |
-          brew install Formula/${{ matrix.Formula }}.rb,
+          brew install Formula/${{ matrix.Formula }}.rb
 
       - name: Brew test tap
         run: |

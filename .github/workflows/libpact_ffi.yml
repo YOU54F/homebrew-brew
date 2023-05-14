@@ -1,7 +1,7 @@
 name: Test FFI versions
 
 on:
-  push:
+  # push:
   workflow_dispatch:
 
 jobs:
