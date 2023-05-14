@@ -19,7 +19,7 @@ class PactRubyStandalone221 < Formula
       url "https://github.com/you54f/pact-ruby-standalone/releases/download/v2.2.1/pact-2.2.1-linux-arm64.tar.gz"
       sha256 "481c4edc3a8c5e53f9d69026cb46988b7904185db3e0762fcffe470991d89c79"
     end
-    on_intel && Hardware::CPU.is_64_bit? do
+    on_intel do
       url "https://github.com/you54f/pact-ruby-standalone/releases/download/v2.2.1/pact-2.2.1-linux-x86_64.tar.gz"
       sha256 "c00e2d25e69c73dd525d53a0b6054cc19fae90f024b14689af6d42eb6aa373dd"
     end

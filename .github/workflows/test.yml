@@ -46,5 +46,5 @@ jobs:
 
       - name: Audit tap (⚠️ experimental ⚠️) - so we ignore the error code 
         run: |
-          brew audit --strict --online pact-ruby-standalone-2.2.1 || true
+          brew audit --strict --online pact-ruby-standalone || true
 

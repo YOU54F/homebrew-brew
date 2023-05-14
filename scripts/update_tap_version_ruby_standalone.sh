@@ -62,14 +62,14 @@ write_homebrew_formulae() {
             echo "        sha256 \"${sha_linux_arm64}\"" >&3
             echo "      end" >&3
         fi
-            echo "      on_intel && Hardware::CPU.is_64_bit? do" >&3
+            echo "      on_intel do" >&3
             echo "        url \"$homepage/releases/download/v$version/pact-$version-linux-x86_64.tar.gz\"" >&3
             echo "        sha256 \"${sha_linux_x86_64}\"" >&3
             echo "      end" >&3
             echo "    end" >&3
         if [[ $sha_linux_x86 ]]; then
             echo "   if Hardware::CPU.is_32_bit?" >&3
-            echo "      on_intel && !Hardware::CPU.is_64_bit? do" >&3
+            echo "      on_intel do" >&3
             echo "        url \"$homepage/releases/download/v$version/pact-$version-linux-x86.tar.gz\"" >&3
             echo "        sha256 \"${sha_linux_x86}\"" >&3
             echo "      end" >&3

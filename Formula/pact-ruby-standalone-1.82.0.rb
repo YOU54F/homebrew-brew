@@ -16,13 +16,13 @@ class PactRubyStandalone1820 < Formula
 
   on_linux do
     if Hardware::CPU.is_64_bit?
-      on_intel && Hardware::CPU.is_64_bit? do
+      on_intel do
         url "https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v1.82.0/pact-1.82.0-linux-x86_64.tar.gz"
         sha256 "d66162c3912fddb01d6f43ccd19caf25f3702544ec470b809a8e8ea0a5fe2dd6"
       end
     end
    if Hardware::CPU.is_32_bit?
-      on_intel && !Hardware::CPU.is_64_bit? do
+      on_intel do
         url "https://github.com/pact-foundation/pact-ruby-standalone/releases/download/v1.82.0/pact-1.82.0-linux-x86.tar.gz"
         sha256 "f1e5042c1ee57f0d5e86fa12ee9e77e4674702d49b4fd8263bdd42160aa71ec7"
       end
