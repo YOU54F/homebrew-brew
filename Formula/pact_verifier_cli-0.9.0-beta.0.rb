@@ -1,4 +1,4 @@
-class PactVerifierCli090-beta < Formula
+class PactVerifierCli090Beta0 < Formula
   desc "Standalone Pact Verifier CLI executable using the Rust Pact impl"
   homepage "https://github.com/pact-foundation/pact-reference"
   version "0.9.0-beta.0"

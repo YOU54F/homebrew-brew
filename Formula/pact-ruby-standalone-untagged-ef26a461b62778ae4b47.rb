@@ -1,29 +1,29 @@
-class PactRubyStandaloneuntagged-ef26a461b62778ae4b47untagged-ef26a461b62778ae4b47untagged-ef26a461b62778ae4b47 < Formula
+class PactRubyStandaloneUntaggedEf26a461b62778ae4b47 < Formula
   desc "Standalone pact CLI executable using the Ruby Pact impl and Travelling Ruby"
   homepage "https://github.com/pact-foundation/pact-ruby-standalone"
   version "untagged-ef26a461b62778ae4b47"
 
   on_macos do
     on_arm do
-      url "https://github.com/pact-foundation/pact-ruby-standalone/releases/download/vuntagged-ef26a461b62778ae4b47/pact-untagged-ef26a461b62778ae4b47-osx.tar.gz"
-      sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+      url "https://github.com/pact-foundation/pact-ruby-standalone/releases/download/untagged-ef26a461b62778ae4b47/pact-0.0.1-1-osx.tar.gz"
+      sha256 "4d95647a401c41b2e22c0136549ccb111e5fbfbb55773d9a59b2bfc9d92330a7"
     end
     on_intel do
-      url "https://github.com/pact-foundation/pact-ruby-standalone/releases/download/vuntagged-ef26a461b62778ae4b47/pact-untagged-ef26a461b62778ae4b47-osx.tar.gz"
-      sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+      url "https://github.com/pact-foundation/pact-ruby-standalone/releases/download/untagged-ef26a461b62778ae4b47/pact-0.0.1-1-osx.tar.gz"
+      sha256 "4d95647a401c41b2e22c0136549ccb111e5fbfbb55773d9a59b2bfc9d92330a7"
     end
   end
 
   on_linux do
     if Hardware::CPU.is_64_bit?
       on_intel do
-        url "https://github.com/pact-foundation/pact-ruby-standalone/releases/download/vuntagged-ef26a461b62778ae4b47/pact-untagged-ef26a461b62778ae4b47-linux-x86_64.tar.gz"
+        url "https://github.com/pact-foundation/pact-ruby-standalone/releases/download/untagged-ef26a461b62778ae4b47/pact-0.0.1-1-linux-x86_64.tar.gz"
         sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
       end
     end
    if Hardware::CPU.is_32_bit?
       on_intel do
-        url "https://github.com/pact-foundation/pact-ruby-standalone/releases/download/vuntagged-ef26a461b62778ae4b47/pact-untagged-ef26a461b62778ae4b47-linux-x86.tar.gz"
+        url "https://github.com/pact-foundation/pact-ruby-standalone/releases/download/untagged-ef26a461b62778ae4b47/pact-0.0.1-1-linux-x86.tar.gz"
         sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
       end
     end

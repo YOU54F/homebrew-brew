@@ -36,7 +36,6 @@ class PactRubyStandalone112 < Formula
     puts "# (see https://github.com/pact-foundation/pact-ruby-standalone/releases/)'"
     puts "# Run 'pact --help'"
     puts "# Run 'pact-broker --help'"
-    puts "# Run 'pact-message --help'"
     puts "# Run 'pact-mock-service --help'"
     puts "# Run 'pact-provider-verifier --help'"
     puts "# Run 'pact-stub-service --help'"
@@ -45,7 +44,6 @@ class PactRubyStandalone112 < Formula
   test do
     system "#{bin}/pact", "--help"
     system "#{bin}/pact-broker", "--help"
-    system "#{bin}/pact-message", "--help"
     system "#{bin}/pact-mock-service", "--help"
     system "#{bin}/pact-provider-verifier", "--help"
     system "#{bin}/pact-stub-service", "--help"
