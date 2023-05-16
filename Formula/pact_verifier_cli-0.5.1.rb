@@ -5,8 +5,8 @@ class PactVerifierCli051 < Formula
 
   on_linux do
     on_intel do
-      url "https://github.com/pact-foundation/pact-reference/releases/download/pact_verifier_cli-v0.5.1/pact_verifier_cli-linux-x86_64.gz"
-      sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+      url "https://github.com/pact-foundation/pact-reference/releases/download/pact_verifier_cli-v0.5.1/pact_verifier_cli-linux-x86_64-0.5.1.gz"
+      sha256 "74a778ad85679a49f8614f0fb6dc55652a3cad0d0b4967c2dd8f9206f809d796"
     end
   end
 
