@@ -1,5 +1,5 @@
 # pact_mock_server_cli Test Results
-## Tue May 16 21:23:04 UTC 2023
+## Tue May 16 23:11:57 UTC 2023
 ## Darwin x86_64
 ### Legend
 - 🕵️ - Failed to Install
