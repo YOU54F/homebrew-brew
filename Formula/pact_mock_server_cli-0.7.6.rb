@@ -5,18 +5,18 @@ class PactMockServerCli076 < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.6/pact_mock_server_cli-osx-x86_64.gz"
+      url "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.6/pact_mock_server_cli-osx-x86_64-0.7.6.gz"
       sha256 "4958f5647c978cb5b4fa25498438ee75e652ff1fc6ebb92d7a81a1b868c3c9a5"
     end
     on_intel do
-      url "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.6/pact_mock_server_cli-osx-x86_64.gz"
+      url "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.6/pact_mock_server_cli-osx-x86_64-0.7.6.gz"
       sha256 "4958f5647c978cb5b4fa25498438ee75e652ff1fc6ebb92d7a81a1b868c3c9a5"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.6/pact_mock_server_cli-linux-x86_64.gz"
+      url "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.7.6/pact_mock_server_cli-linux-x86_64-0.7.6.gz"
       sha256 "291931d0c52931afddd3e852a375af3c045d69a156e26f76d3e376243d2dfa2a"
     end
   end

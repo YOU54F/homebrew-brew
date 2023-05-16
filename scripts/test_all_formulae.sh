@@ -30,6 +30,6 @@ done
 
 git fetch
 git pull
-git add $TEST_RESULT_FILE
+git add .
 git commit -m "ci(test): [skip ci] add $TEST_RESULT_FILE"
 git push
