@@ -18,8 +18,21 @@ Tap the repo, and then pick a tool, and pick your version
 ```
 
 ```sh
-    brew tap-info you54f/pact --json | jq -r '.[].formula_names|.[]'
+    brew tap-info you54f/pact --json | jq -r '.[].formula_names|.[] | sort -nr'
 ```
+
+Install latest major versions
+
+```sh
+    brew install you54f/pact/pact-ruby-standalone@1
+```
+
+```sh
+    brew install you54f/pact/pact-ruby-standalone@2
+``
+
+
+Install version specific
 
 ```sh
     brew install you54f/pact/pact-ruby-standalone-1.92.0
