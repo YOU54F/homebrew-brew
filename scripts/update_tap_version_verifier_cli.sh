@@ -13,6 +13,9 @@ FORMULA_DIR=Formula
 if [[ $LATEST == "true" ]]; then
     FORMULAE_FILE="$FORMULA_DIR/$TOOL_NAME.rb"
     FORMULA_NAME="$TOOL_NAME_PASCAL"
+elif [[ $LATEST_VERSION ]]; then
+    FORMULAE_FILE="$FORMULA_DIR/${TOOL_NAME}@$MAJOR_TAG.rb"
+    FORMULA_NAME="${TOOL_NAME_PASCAL}AT${MAJOR_TAG}"
 else
     FORMULAE_FILE="$FORMULA_DIR/$TOOL_NAME-$version.rb"
     FORMULA_NAME="$TOOL_NAME_PASCAL$MAJOR_TAG$MINOR_TAG$PATCH_TAG"
@@ -25,62 +28,66 @@ write_homebrew_formulae() {
         : > "$FORMULAE_FILE"
     fi
 
+    if [[ $MAJOR_TAG -eq 0 && $MINOR_TAG -lt 7 ]]; then
+        filename_linux_x64=$TOOL_NAME-v$version/$TOOL_NAME-linux-x86_64-$version.gz
+    else
+        filename_macos_arm=$TOOL_NAME-v$version/$TOOL_NAME-osx-aarch64.gz
+        filename_macos_x64=$TOOL_NAME-v$version/$TOOL_NAME-osx-x86_64.gz
+        filename_linux_arm=$TOOL_NAME-v$version/$TOOL_NAME-linux-aarch64.gz
+        filename_linux_x64=$TOOL_NAME-v$version/$TOOL_NAME-linux-x86_64.gz
+    fi
+
      exec 3<> $FORMULAE_FILE
         echo "class $FORMULA_NAME < Formula" >&3
         echo "  desc \"$DESCRIPTION\"" >&3
         echo "  homepage \"$homepage\"" >&3
         echo "  version \"$version\"" >&3
         echo "" >&3
-        ## No MacOS builds prior to 0.7.0
         if [[ $sha_osx_x86_64 ]]; then
-            echo "  on_macos do" >&3
-        fi
-        ## ARM64 MacOS builds introduced in 0.9.15
-        if [[ $MAJOR_TAG -lt 1 && ($MINOR_TAG -lt 10 && $PATCH_TAG -lt 15) && $sha_osx_x86_64 ]]; then
-        echo "    on_arm do" >&3
-        echo "      url \"$homepage/releases/download/$TOOL_NAME-v$version/$TOOL_NAME-osx-x86_64.gz\"" >&3
-        echo "      sha256 \"${sha_osx_x86_64}\"" >&3
-        echo "    end" >&3
-        elif [[ $sha_osx_arm64 ]]; then
-        echo "    on_arm do" >&3
-        echo "      url \"$homepage/releases/download/$TOOL_NAME-v$version/$TOOL_NAME-osx-aarch64.gz\"" >&3
-        echo "      sha256 \"${sha_osx_arm64}\"" >&3
-        echo "    end" >&3
-        fi
-        ## x86_64 MacOS builds introduced in 0.7.0
-        if [[ $sha_osx_x86_64 ]]; then
-            echo "    on_intel do" >&3
-            echo "      url \"$homepage/releases/download/$TOOL_NAME-v$version/$TOOL_NAME-osx-x86_64.gz\"" >&3
+        echo "  on_macos do" >&3
+            if [[ $sha_osx_arm64 ]]; then
+            echo "    on_arm do" >&3
+            echo "      url \"$homepage/releases/download/$filename_macos_arm\"" >&3
+            echo "      sha256 \"${sha_osx_arm64}\"" >&3
+            echo "    end" >&3
+            else
+            echo "    on_arm do" >&3
+            echo "      url \"$homepage/releases/download/$filename_macos_x64\"" >&3
             echo "      sha256 \"${sha_osx_x86_64}\"" >&3
             echo "    end" >&3
-            echo "  end" >&3
-            echo "" >&3
+            fi
+        echo "    on_intel do" >&3
+        echo "      url \"$homepage/releases/download/$filename_macos_x64\"" >&3
+        echo "      sha256 \"${sha_osx_x86_64}\"" >&3
+        echo "    end" >&3
+        echo "  end" >&3
+        echo "" >&3
         fi
+        if [[ $filename_linux_x64 ]]; then
         echo "  on_linux do" >&3
-        ## Linux aarch64 introduced in 0.9.14
         if [[ $sha_linux_arm64 ]]; then
         echo "    on_arm do" >&3
-        echo "      url \"$homepage/releases/download/$TOOL_NAME-v$version/$TOOL_NAME-linux-aarch64.gz\"" >&3
+        echo "      url \"$homepage/releases/download/$filename_linux_arm\"" >&3
         echo "      sha256 \"${sha_linux_arm64}\"" >&3
         echo "    end" >&3
         fi
-        ## Always been Linux x86_64
         echo "    on_intel do" >&3
-        echo "      url \"$homepage/releases/download/$TOOL_NAME-v$version/$TOOL_NAME-linux-x86_64.gz\"" >&3
+        echo "      url \"$homepage/releases/download/$filename_linux_x64\"" >&3
         echo "      sha256 \"${sha_linux_x86_64}\"" >&3
         echo "    end" >&3
         echo "  end" >&3
+        fi
         echo "" >&3
         echo "  def install" >&3
         echo "    # pact-reference" >&3
         echo "    bin.install Dir[\"*\"]; puts \"# Run '$TOOL_NAME --help'\"" >&3
-        if [[ $MAJOR_TAG -lt 1 && ($MINOR_TAG -lt 10 && $PATCH_TAG -lt 15) ]]; then
+        if [[ -z $sha_osx_arm64 ]]; then
             echo "    on_macos do" >&3
             echo "      on_arm do" >&3
             echo "        puts \"# Rosetta is required to run $TOOL_NAME commands\"" >&3
             echo "        puts \"# sudo softwareupdate --install-rosetta --agree-to-license\"" >&3
             echo "      end" >&3
-            echo "    end" >&3            
+            echo "    end" >&3      
         fi
         echo "  end" >&3
         echo "" >&3
@@ -144,7 +151,11 @@ for platform in ${platforms[@]}; do
         echo "no binary for $platform + $arch - youll need Rosetta"
         arch="x86_64"
         fi
-        filename=$TOOL_NAME-${platform}-${arch}
+        if [[ $MAJOR_TAG -eq 0 && $MINOR_TAG -lt 7 ]]; then
+            filename=$TOOL_NAME-${platform}-${arch}-$version
+        else
+            filename=$TOOL_NAME-${platform}-${arch}
+        fi
 
         echo "⬇️  Downloading $version $filename.gz from $homepage"
         curl -LO $homepage/releases/download/$TOOL_NAME-v$version/$filename.gz

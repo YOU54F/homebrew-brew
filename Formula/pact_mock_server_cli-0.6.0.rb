@@ -17,7 +17,7 @@ class PactMockServerCli060 < Formula
   on_linux do
     on_intel do
       url "https://github.com/pact-foundation/pact-reference/releases/download/pact_mock_server_cli-v0.6.0/pact_mock_server_cli-linux-x86_64-0.6.0.gz"
-      sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+      sha256 "831e52675352cbc03a1b64eabff36ab57ce8700d71f29374c7ccf5e37a5a67c2"
     end
   end
 

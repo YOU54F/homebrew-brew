@@ -17,8 +17,8 @@ if [[ $LATEST == "true" ]]; then
     FORMULAE_FILE="$FORMULA_DIR/$TOOL_NAME.rb"
     FORMULA_NAME="$TOOL_NAME_PASCAL"
 elif [[ $LATEST_VERSION ]]; then
-    FORMULAE_FILE="$FORMULA_DIR/${TOOL_NAME}V$MAJOR_TAG.rb"
-    FORMULA_NAME="$TOOL_NAME_PASCAL"
+    FORMULAE_FILE="$FORMULA_DIR/${TOOL_NAME}@$MAJOR_TAG.rb"
+    FORMULA_NAME="${TOOL_NAME_PASCAL}AT${MAJOR_TAG}"
 else
     FORMULAE_FILE="$FORMULA_DIR/$TOOL_NAME-$version.rb"
     FORMULA_NAME="$TOOL_NAME_PASCAL$MAJOR_TAG$MINOR_TAG$PATCH_TAG"
@@ -31,7 +31,7 @@ write_homebrew_formulae() {
         : > "$FORMULAE_FILE"
     fi
 
-    if [[ $MAJOR_TAG -eq 0 && $MINOR_TAG -lt 8 ]]; then
+    if [[ $MAJOR_TAG -eq 0 && $MINOR_TAG -lt 7 ]]; then
         filename_linux_x64=$TOOL_NAME-v$version/$TOOL_NAME-linux-x86_64-$version.gz
         filename_macos_x64=$TOOL_NAME-v$version/$TOOL_NAME-osx-x86_64-$version.gz
     else
@@ -52,17 +52,17 @@ write_homebrew_formulae() {
         echo "" >&3
         if [[ $sha_osx_x86_64 ]]; then
         echo "  on_macos do" >&3
-        if [[ $sha_osx_arm64 ]]; then
-        echo "    on_arm do" >&3
-        echo "      url \"$homepage/releases/download/$filename_macos_arm\"" >&3
-        echo "      sha256 \"${sha_osx_arm64}\"" >&3
-        echo "    end" >&3
-        else
-        echo "    on_arm do" >&3
-        echo "      url \"$homepage/releases/download/$filename_macos_x64\"" >&3
-        echo "      sha256 \"${sha_osx_x86_64}\"" >&3
-        echo "    end" >&3
-        fi
+            if [[ $sha_osx_arm64 ]]; then
+            echo "    on_arm do" >&3
+            echo "      url \"$homepage/releases/download/$filename_macos_arm\"" >&3
+            echo "      sha256 \"${sha_osx_arm64}\"" >&3
+            echo "    end" >&3
+            else
+            echo "    on_arm do" >&3
+            echo "      url \"$homepage/releases/download/$filename_macos_x64\"" >&3
+            echo "      sha256 \"${sha_osx_x86_64}\"" >&3
+            echo "    end" >&3
+            fi
         echo "    on_intel do" >&3
         echo "      url \"$homepage/releases/download/$filename_macos_x64\"" >&3
         echo "      sha256 \"${sha_osx_x86_64}\"" >&3
@@ -147,8 +147,11 @@ for platform in linux osx; do
             arch="x86_64"
         fi
 
-        filename=$TOOL_NAME-${platform}-${arch}
-
+        if [[ $MAJOR_TAG -eq 0 && $MINOR_TAG -lt 7 ]]; then
+            filename=$TOOL_NAME-${platform}-${arch}-$version
+        else
+            filename=$TOOL_NAME-${platform}-${arch}
+        fi
         echo "⬇️  Downloading $version $filename.gz from $homepage"
         curl -LO $homepage/releases/download/$TOOL_NAME-v$version/$filename.gz
 

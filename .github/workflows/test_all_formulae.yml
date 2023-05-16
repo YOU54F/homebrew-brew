@@ -30,7 +30,8 @@ jobs:
         env:
           TOOL: ${{ matrix.tool }}
       - name: Upload standalone packages
+        if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: TEST_RESULTS_${{ runner.os }}-${{ matrix.tool }}.md
-          path: TEST_RESULTS_${{ matrix.tool }}.md
+          name: TEST_RESULTS_${{ matrix.tool }}.${{ runner.os }}._${{ runner.os }}.md
+          path: TEST_RESULTS_${{ matrix.tool }}.${{ runner.os }}._${{ runner.os }}.md

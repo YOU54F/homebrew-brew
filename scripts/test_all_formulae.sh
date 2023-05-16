@@ -28,8 +28,16 @@ for formula in ${formulaes[@]}; do
   fi     
 done
 
+if [[ $RUNNER_OS == 'Linux' ]]; then
+  git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+  git config --global user.name "GitHub Actions"
+fi
+if [[ $RUNNER_OS ]]; then
 git fetch
 git pull
-git add .
-git commit -m "ci(test): [skip ci] add $TEST_RESULT_FILE"
+RUNNER_TEST_RESULT_FILE=$TEST_RESULT_FILE.$RUNNER_OS.$RUNNER_ARCH.md
+mv $TEST_RESULT_FILE $RUNNER_TEST_RESULT_FILE
+git add $RUNNER_TEST_RESULT_FILE
+git commit -m "ci(test): [skip ci] add $RUNNER_TEST_RESULT_FILE"
 git push
+fi
