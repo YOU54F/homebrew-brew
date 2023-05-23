@@ -36,6 +36,8 @@ linux_task:
       brew --version
   test_script: chmod +x scripts/** && ./scripts/test_all_formulae.sh
 
+env:
+  GITHUB_TOKEN: ENCRYPTED[314e628134e7350d60f4adf5029ff0877a4c4173766d31e3f0eb9fc6e109bc6e0e7b7293be0eb7c9f4f54b7688f9b2a2]
 
 macos_task: 
   macos_instance:
