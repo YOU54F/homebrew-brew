@@ -1,5 +1,5 @@
 # pact_mock_server_cli Test Results
-## Tue May 23 19:47:21 UTC 2023
+## Tue May 23 21:06:07 UTC 2023
 ## Linux x86_64
 ### Legend
 - 🕵️ - Failed to Install
