@@ -4,10 +4,10 @@ The Pact public homebrew tap for MacOS/Linux homebrew formulae.
 
 The easier way to install the Pact bundle of tools on your MacOS/Linux machine using Homebrew.
 
-- [`pact-ruby-standalone`](https://github.com/pact-foundation/pact-ruby-standalone)
-- [`pact_mock_server_cli`](https://github.com/pact-foundation/pact-reference)
-- [`pact_verifier_cli`](https://github.com/pact-foundation/pact-reference)
-<!-- - [`pact-plugin-cli`](https://github.com/pact-foundation/pact-plugins) -->
+- [`pact-ruby-standalone`](https://github.com/you54f/pact-ruby-standalone)
+- [`pact_mock_server_cli`](https://github.com/you54f/pact-reference)
+- [`pact_verifier_cli`](https://github.com/you54f/pact-reference)
+<!-- - [`pact-plugin-cli`](https://github.com/you54f/pact-plugins) -->
 
 ## Installation
 
@@ -18,13 +18,13 @@ Tap the repo (Optional)
 > for ease of use
 
 ```sh
-    brew tap pact-foundation/pact
+    brew tap you54f/pact
 ```
 
 List all available formulas
 
 ```sh
-    brew tap-info pact-foundation/pact --json | jq -r '.[].formula_names|.[]' | sort -nr
+    brew tap-info you54f/pact --json | jq -r '.[].formula_names|.[]' | sort -nr
 ```
 
 Install your tool
@@ -32,19 +32,19 @@ Install your tool
 ### pact-ruby-standalone
 
 ```sh
-    brew install pact-foundation/pact/pact-ruby-standalone
+    brew install you54f/pact/pact-ruby-standalone
 ```
 
 ### pact_mock_server_cli
 
 ```sh
-    brew install pact-foundation/pact/pact_mock_server_cli
+    brew install you54f/pact/pact_mock_server_cli
 ```
 
 ### pact_verifier_cli
 
 ```sh
-    brew install pact-foundation/pact/pact_verifier_cli
+    brew install you54f/pact/pact_verifier_cli
 ```
 
 
@@ -55,7 +55,7 @@ Installation
 ### Install Latest
 
 ```sh
-brew install pact-foundation/pact/pact-ruby-standalone
+brew install you54f/pact/pact-ruby-standalone
 ```
 
 ### Install Major Tag
@@ -65,13 +65,13 @@ append `@<major_tag>` to the name
 Latest `2.x`
 
 ```sh
-brew install pact-foundation/pact/pact-ruby-standalone@2
+brew install you54f/pact/pact-ruby-standalone@2
 ```
 
 Latest `1.x`
 
 ```sh
-brew install pact-foundation/pact/pact-ruby-standalone@1
+brew install you54f/pact/pact-ruby-standalone@1
 ```
 
 ## Included tools
