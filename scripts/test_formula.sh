@@ -22,6 +22,7 @@ if brew install Formula/$formula; then
     write_result ✅ $TEST_RESULT_FILE && uninstall_tool $tool
     else 
     write_result ❌ $TEST_RESULT_FILE  && uninstall_tool $tool
+    fi
 else 
     write_result 🕵️ $TEST_RESULT_FILE
 fi
