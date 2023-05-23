@@ -30,8 +30,8 @@ class PactMockServerCli < Formula
     bin.install Dir["*"]; puts "# Run 'pact_mock_server_cli --help'"
     on_macos do
       on_arm do
-        puts "Rosetta is required to run pact_mock_server_cli commands"
-        puts "sudo softwareupdate --install-rosetta --agree-to-license"
+        puts "# Rosetta is required to run pact_mock_server_cli commands"
+        puts "# sudo softwareupdate --install-rosetta --agree-to-license"
       end
     end
   end

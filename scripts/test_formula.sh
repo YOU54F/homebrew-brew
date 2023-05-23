@@ -16,9 +16,14 @@ tool=${formula%.rb} # pact-ruby-standalone-1.1.0
 installed=false
 brew install Formula/$formula && installed=true || write_result 🕵️ $TEST_RESULT_FILE
 
-if [ "$installed" == true ]; then
-    brew test $tool && write_result ✅ $TEST_RESULT_FILE || write_result ❌ $TEST_RESULT_FILE;
-    uninstall_tool $tool
+
+if brew install Formula/$formula; then
+    if  brew test $tool; then
+    write_result ✅ $TEST_RESULT_FILE && uninstall_tool $tool
+    else 
+    write_result ❌ $TEST_RESULT_FILE  && uninstall_tool $tool
+else 
+    write_result 🕵️ $TEST_RESULT_FILE
 fi
 
 ## Legend

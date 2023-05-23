@@ -2,9 +2,7 @@
 set -e
 
 homepage="https://github.com/you54f/pact-ruby-standalone"
-homepage_pact_reference="https://github.com/pact-foundation/pact-reference"
 version=$1
-FORMULAE_FILE="pact-ruby-standalone.rb"
 
 
 display_help() {
@@ -28,7 +26,7 @@ else
 
     echo "⚗️  Sorting out the homebrew tap version... "
     git checkout -b version/v$version
-    git add $FORMULAE_FILE
+    git add .
     git commit -m "chore(release): Update version to v$version"
     git push --set-upstream origin version/v$version
 

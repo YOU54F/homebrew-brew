@@ -1,4 +1,4 @@
-class PactMockServerCli077 < Formula
+class PactMockServerCliAT0 < Formula
   desc "Standalone Pact Mock Server CLI executable using the Rust Pact impl"
   homepage "https://github.com/pact-foundation/pact-reference"
   version "0.7.7"

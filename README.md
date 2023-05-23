@@ -11,55 +11,67 @@ The easier way to install the Pact bundle of tools on your MacOS/Linux machine u
 
 ## Installation
 
-Tap the repo, and then pick a tool, and pick your version
+Tap the repo (Optional)
+
+> If you choose not to tap the repo upfront, you'll need to prefix your install commands
+> with the tap name. It will still be _tapped_. They are shown in full in this section 
+> for ease of use
 
 ```sh
-    brew tap you54f/pact
+    brew tap pact-foundation/pact
 ```
 
+List all available formulas
+
 ```sh
-    brew tap-info you54f/pact --json | jq -r '.[].formula_names|.[] | sort -nr'
+    brew tap-info pact-foundation/pact --json | jq -r '.[].formula_names|.[]' | sort -nr
 ```
 
-Install latest major versions
+Install your tool
+
+### pact-ruby-standalone
 
 ```sh
-    brew install you54f/pact/pact-ruby-standalone@1
+    brew install pact-foundation/pact/pact-ruby-standalone
 ```
 
-```sh
-    brew install you54f/pact/pact-ruby-standalone@2
-``
-
-
-Install version specific
+### pact_mock_server_cli
 
 ```sh
-    brew install you54f/pact/pact-ruby-standalone-1.92.0
+    brew install pact-foundation/pact/pact_mock_server_cli
 ```
 
+### pact_verifier_cli
+
 ```sh
-    brew install you54f/pact/pact_verifier_cli-0.10.6
+    brew install pact-foundation/pact/pact_verifier_cli
 ```
 
+
+## pact-ruby-standalone
+
+Installation
+
+### Install Latest
+
 ```sh
-    brew install you54f/pact/pact_mock_server_cli-1.0.0
+brew install pact-foundation/pact/pact-ruby-standalone
 ```
 
-# pact-ruby-standalone
+### Install Major Tag
 
-## Installation
+append `@<major_tag>` to the name
 
-### Latest Stable
+Latest `2.x`
 
 ```sh
-brew install you54f/pact/pact-ruby-standalone-1.92.0
+brew install pact-foundation/pact/pact-ruby-standalone@2
 ```
 
-### Latest Beta
+Latest `1.x`
 
 ```sh
-brew install you54f/pact/pact-ruby-standalone-2.2.1
+brew install pact-foundation/pact/pact-ruby-standalone@1
 ```
 
 ## Included tools
@@ -75,10 +87,6 @@ brew install you54f/pact/pact-ruby-standalone-2.2.1
 └── pact-provider-verifier
 ```
 
-## Standalone versions
-
-See [`./PACT_RUBY_STANDALONE_VERSIONS.md`](./PACT_RUBY_STANDALONE_VERSIONS.md) for full matrix
-
 ## Supported Platforms
 
 | OS          | Architecture  | Supported  | Version    |
@@ -93,18 +101,6 @@ See [`./PACT_RUBY_STANDALONE_VERSIONS.md`](./PACT_RUBY_STANDALONE_VERSIONS.md) f
 
 | Ruby Version  | Pact-Ruby-Standalone Version  |
 | ------------- | --------------------------    |
-|    3.1.2      |           >= 2                |
+|    3.2.2      |           >= 2                |
 |    2.4.10     |       >= 1.89.00 && < 2       |
 |    2.2        |          <=1.88.90            |
-
-## Notes
-
-For versions less than `2.x`.
-
-OSX ARM (M1/M2) Machines will require Rosetta tools, as the Ruby binaries as currently built for x86_64.
-
-If you don't already have it installed, you can use the following command
-
-```sh
-sudo softwareupdate --install-rosetta --agree-to-license
-```

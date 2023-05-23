@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 homepage="https://github.com/pact-foundation/pact-ruby-standalone"
@@ -93,7 +93,7 @@ write_homebrew_formulae() {
         echo "    puts \"# Run 'pact-provider-verifier --help'\"" >&3
         echo "    puts \"# Run 'pact-stub-service --help'\"" >&3
         echo "    puts \"# Run 'pactflow --help'\"" >&3
-        if [[ -z $sha_osx_arm64 && $MAJOR_TAG -lt 1 ]]; then 
+        if [[ -z $sha_osx_arm64 && $MAJOR_TAG -lt 2 ]]; then 
             echo "    on_macos do" >&3
             echo "      on_arm do" >&3
             echo "        puts \"# Rosetta is required to run $TOOL_NAME commands\"" >&3

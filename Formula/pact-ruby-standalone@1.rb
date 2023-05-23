@@ -36,6 +36,12 @@ class PactRubyStandaloneAT1 < Formula
     puts "# Run 'pact-provider-verifier --help'"
     puts "# Run 'pact-stub-service --help'"
     puts "# Run 'pactflow --help'"
+    on_macos do
+      on_arm do
+        puts "# Rosetta is required to run pact-ruby-standalone commands"
+        puts "# sudo softwareupdate --install-rosetta --agree-to-license"
+      end
+    end
   end
 
   test do
