@@ -60,7 +60,7 @@ write_homebrew_formulae() {
         echo "  on_linux do" >&3
         echo "    if Hardware::CPU.is_64_bit?" >&3
         if [[ $sha_linux_arm64 && $MAJOR_TAG -gt 1 ]]; then
-            echo "      on_arm && Hardware::CPU.is_64_bit? do" >&3
+            echo "      on_arm do" >&3
             echo "        url \"$homepage/releases/download/v$version/pact-$version-linux-arm64.tar.gz\"" >&3
             echo "        sha256 \"${sha_linux_arm64}\"" >&3
             echo "      end" >&3

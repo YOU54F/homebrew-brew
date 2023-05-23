@@ -2,7 +2,7 @@
 # /root/.rbenv/versions/2.6.10/bin/:/root/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/.rbenv/versions/2.6.10/bin
 
 linux_task: 
-  container:
+  arm_container:
     image: ubuntu:22.04
   env:
     PATH: "/root/.rbenv/shims:/root/.rbenv/bin:/home/linuxbrew/.linuxbrew/bin:$PATH"
@@ -42,9 +42,9 @@ macos_task:
     image: ghcr.io/cirruslabs/macos-ventura-base:latest
   env:
     matrix:
-      - tool: pact-ruby-standalone
-      - tool: pact_verifier_cli
-      - tool: pact_mock_server_cli
+      - TOOL: pact-ruby-standalone
+      - TOOL: pact_verifier_cli
+      - TOOL: pact_mock_server_cli
   pre_req_script:
       # We need rosetta in order to the x86_64 package in 1.x pact-ruby-standalone
       - softwareupdate --install-rosetta --agree-to-license

@@ -45,7 +45,7 @@ if [[ $RUNNER_OS == 'Linux' ]]; then
 fi
   RUNNER_TEST_RESULT_FILE=${TEST_RESULT_FILE%.md}.$RUNNER_OS.$RUNNER_ARCH.md
   mv $TEST_RESULT_FILE $RUNNER_TEST_RESULT_FILE
-if [[ $RUNNER_OS && -z $ACT ]]; then
+if [[ $RUNNER_OS && -z $ACT || $CIRRUS_CI ]]; then
   git fetch
   git pull
   git add $RUNNER_TEST_RESULT_FILE
