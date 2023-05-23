@@ -4,11 +4,16 @@ on:
   repository_dispatch:
     types:
       - pact-ruby-standalone-released
+      - pact_mock_server_cli-released
+      - pact_verifier_cli-released
 
 jobs:
   release:
     name: Release update
-    runs-on: macOS-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-latest,ubuntu-latest]
 
     steps:
       - name: Checkout repository
@@ -20,9 +25,55 @@ jobs:
           git config --global user.name "${GITHUB_ACTOR}"
           git config pull.ff only
 
-      - name: Run update script
+      - name: install homebrew
         run: |
-          ./scripts/update_tap_version.sh ${{ github.event.client_payload.version }}
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          echo "/home/linuxbrew/.linuxbrew/bin" >> $GITHUB_PATH
+        if: ${{ runner.os == 'Linux' }}
+
+      - name: Run update script
+        # if: github.workflow.repository_dispatch.event == 'pact-ruby-standalone-released'
+        run: |
+          VERSION=${{ github.event.client_payload.version }}
+          MAJOR_TAG=$(echo $VERSION | cut -d '.' -f 1)
+          MINOR_TAG=$(echo $VERSION | cut -d '.' -f 2)
+          PATCH_TAG=$(echo $VERSION | cut -d '.' -f 3)
+          if [[ ${{ github.workflow.repository_dispatch.event }} == 'pact-ruby-standalone-released' ]]; then do
+            FORMULA=pact-ruby-standalone
+            UPDATE_TAP_FILE=update_tap_version_ruby_standalone.sh
+          elif [[ ${{ github.workflow.repository_dispatch.event }} == 'pact_mock_server_cli-released' ]]; then do
+            FORMULA=pact_mock_server_cli
+            UPDATE_TAP_FILE=update_tap_version_mock_server_cli.sh
+          elif [[ ${{ github.workflow.repository_dispatch.event }} == 'pact_verifier_cli-released' ]]; then do
+            FORMULA=pact_verifier_cli
+            UPDATE_TAP_FILE=update_tap_version_verifier_cli.sh
+          fi
+
+
+          if [[ ${{ github.event.client_payload.latest }} == 'true' ]]; then do
+            LATEST=true ./scripts/${UPDATE_TAP_FILE} ${{ github.event.client_payload.version }}
+            brew install $(git ls-files . --exclude-standard --others | grep -e "Formula/${FORMULA}.rb")
+            ./scripts/test.sh
+            brew uninstall $FORMULA
+          fi
+
+          if [[ ${{ github.event.client_payload.pin_latest }} == 'true' ]]; then do
+            LATEST_VERSION=true ./scripts/${UPDATE_TAP_FILE} ${{ github.event.client_payload.version }}
+            brew install $(git ls-files . --exclude-standard --others | grep -e "Formula/${FORMULA}@")
+            ./scripts/test.sh
+            brew uninstall $FORMULA@$MAJOR_TAG
+          fi
+
+
+          LATEST_VERSION=true ./scripts/${UPDATE_TAP_FILE} ${{ github.event.client_payload.version }}
+          brew install $(git ls-files . --exclude-standard --others | grep -e "Formula/${FORMULA}@")
+          brew uninstall $FORMULA@$MAJOR_TAG
+
+          git ls-files . --exclude-standard --others
+
+      - name: Create PR with updated tap
+        if: ${{ runner.os == 'MacOS' }}
+        run: |
+          ./scripts/create_updated_tap_pr.sh ${{ github.event.client_payload.version }}
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-          CREATE_PR: true

@@ -1,0 +1,53 @@
+
+# /root/.rbenv/versions/2.6.10/bin/:/root/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/root/.rbenv/versions/2.6.10/bin
+
+linux_task: 
+  arm_container:
+    image: ubuntu:22.04
+  env:
+    PATH: "/root/.rbenv/shims:/root/.rbenv/bin:/home/linuxbrew/.linuxbrew/bin:$PATH"
+    matrix:
+      - TOOL: pact-ruby-standalone
+      - TOOL: pact_verifier_cli
+      - TOOL: pact_mock_server_cli
+  setup_script: |
+      echo $PATH
+      # Install packages for building ruby
+      apt-get update
+      apt-get install -y --force-yes build-essential curl git
+      apt-get install -y --force-yes zlib1g-dev libssl-dev libreadline-dev libyaml-dev libxml2-dev libxslt-dev
+      apt-get clean
+
+      # Install rbenv and ruby-build
+      git clone https://github.com/rbenv/rbenv.git /root/.rbenv
+      git clone https://github.com/rbenv/ruby-build.git /root/.rbenv/plugins/ruby-build
+      # /root/.rbenv/plugins/ruby-build/install.sh
+      echo $PATH
+
+      rbenv install 2.6.10
+      rbenv global 2.6.10
+      ruby --version
+      echo $PATH
+      curl -fsSL https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-doctor | bash
+      # # Install packages for building homebrew
+      apt-get install --yes build-essential procps curl file git
+      # # Install homebrew for aarch64 linux
+      /bin/bash -c "$(curl -fsSL https://gist.githubusercontent.com/YOU54F/3238dae00aeda9e8fa870b9644abc3f8/raw/ffec1d4f44b45b7305bb9a4c157e65c3c1792695/install.sh)" || true
+      brew --version
+  test_script: chmod +x scripts/** && ./scripts/test_all_formulae.sh
+
+macos_task: 
+  macos_instance:
+    image: ghcr.io/cirruslabs/macos-ventura-base:latest
+  env:
+    matrix:
+      - TOOL: pact-ruby-standalone
+      - TOOL: pact_verifier_cli
+      - TOOL: pact_mock_server_cli
+  pre_req_script:
+      # We need rosetta in order to the x86_64 package in 1.x pact-ruby-standalone
+      - softwareupdate --install-rosetta --agree-to-license
+  test_script: chmod +x scripts/** && ./scripts/test_all_formulae.sh
+  # << : *BUILD_TEST_TASK_TEMPLATE
+
+

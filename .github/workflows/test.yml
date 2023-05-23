@@ -1,7 +1,6 @@
 name: Test versions
 
 on:
-  push:
   pull_request:
 
 jobs:
@@ -25,10 +24,8 @@ jobs:
 
       - name: Install tap
         run: |
-          brew tap pact-foundation/pact-ruby-standalone
-          cd $(brew --prefix)/Homebrew/Library/Taps/pact-foundation/homebrew-pact-ruby-standalone/
-          hub checkout ${{ github.sha }}
-          brew install --verbose --debug pact-ruby-standalone
+          brew tap you54f/pact
+          brew install you54f/pact/pact-ruby-standalone
 
       - name: Brew test tap
         run: |

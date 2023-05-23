@@ -1,0 +1,37 @@
+name: Generate test matrix
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-latest,ubuntu-latest]
+        tool: [pact-ruby-standalone,pact_mock_server_cli,pact_verifier_cli]
+      fail-fast: false
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: install homebrew
+        run: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          echo "/home/linuxbrew/.linuxbrew/bin" >> $GITHUB_PATH
+        if: ${{ runner.os == 'Linux' }}
+
+      - name: Install tap
+        run: |
+          ./scripts/test_all_formulae.sh
+        env:
+          TOOL: ${{ matrix.tool }}
+      - name: Upload standalone packages
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: TEST_RESULTS_${{ matrix.tool }}.${{ runner.os }}.${{ runner.arch }}.md
+          path: TEST_RESULTS_${{ matrix.tool }}.${{ runner.os }}.${{ runner.arch }}.md
