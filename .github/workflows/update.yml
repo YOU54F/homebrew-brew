@@ -6,6 +6,7 @@ on:
       - pact-ruby-standalone-released
       - pact_mock_server_cli-released
       - pact_verifier_cli-released
+      - pact-plugin-cli-released
 
 jobs:
   release:
@@ -47,6 +48,9 @@ jobs:
           elif [[ ${{ github.workflow.repository_dispatch.event }} == 'pact_verifier_cli-released' ]]; then do
             FORMULA=pact_verifier_cli
             UPDATE_TAP_FILE=update_tap_version_verifier_cli.sh
+          elif [[ ${{ github.workflow.repository_dispatch.event }} == 'pact-plugin-cli-released' ]]; then do
+            FORMULA=pact-plugin-cli
+            UPDATE_TAP_FILE=update_tap_version_plugin_cli.sh
           fi
 
 
