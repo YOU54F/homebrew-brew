@@ -1,5 +1,5 @@
 # pact-plugin-cli Test Results
-## Tue May 23 21:32:59 UTC 2023
+## Sun Aug  6 05:38:47 UTC 2023
 ## Darwin x86_64
 ### Legend
 - 🕵️ - Failed to Install
