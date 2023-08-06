@@ -27,7 +27,9 @@ class PactMockServerCli < Formula
 
   def install
     # pact-reference
-    bin.install Dir["*"]; puts "# Run 'pact_mock_server_cli --help'"
+    bin.install Dir["*"];
+    libexec.install Dir["*"]  puts "# Run 'pact_mock_server_cli --help'"
+    bin.install_symlink "#{libexec}/pact-broker-app.sh"
     on_macos do
       on_arm do
         puts "# Rosetta is required to run pact_mock_server_cli commands"

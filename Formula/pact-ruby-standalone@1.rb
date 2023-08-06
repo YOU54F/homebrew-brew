@@ -25,8 +25,15 @@ class PactRubyStandaloneAT1 < Formula
 
   def install
     # pact-ruby-standalone
-    bin.install Dir["bin/*"]
-    lib.install Dir["lib/*"]
+    libexec.install Dir["*"]
+    bin.install_symlink "#{libexec}/pact"
+    bin.install_symlink "#{libexec}/pact-broker"
+    bin.install_symlink "#{libexec}/pact-message"
+    bin.install_symlink "#{libexec}/pact-mock-service"
+    bin.install_symlink "#{libexec}/pact-plugin-cli"
+    bin.install_symlink "#{libexec}/pact-provider-verifier"
+    bin.install_symlink "#{libexec}/pact-stub-service"
+    bin.install_symlink "#{libexec}/pactflow"
     puts "# (see https://github.com/pact-foundation/pact-ruby-standalone/releases/)'"
     puts "# Run 'pact --help'"
     puts "# Run 'pact-broker --help'"
