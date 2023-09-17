@@ -30,7 +30,9 @@ class Tart < Formula
       sha256 "6ea7ac7d2d06bd79ea49b8b3f77f25b140038980ebf0115ec7bfcbc91e47e3b9"
       def install
         system "swift build --product tart --configuration release --disable-sandbox"
-        system "codesign --sign - --entitlements Resources/tart-prod.entitlements --force .build/release/tart"
+        system "codesign --sign - --entitlements Resources/tart-dev.entitlements --force .build/release/tart"
+        lib.install "Resources/tart-dev.entitlements" => "tart-dev.entitlements"
+        lib.install "Resources/tart-prod.entitlements" => "tart-prod.entitlements"
         bin.install ".build/release/tart" => "tart"
       end
     end
@@ -39,6 +41,9 @@ class Tart < Formula
   def caveats
     <<~EOS
       See the GitHub repository for more information
+      app getting killed straight away? check your entitlements
+      codesign --sign - --entitlements #{lib}/tart-dev.entitlements --force tart
+      codesign --sign - --entitlements #{lib}/tart-prod.entitlements --force tart
     EOS
   end
 end
