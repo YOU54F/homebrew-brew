@@ -27,7 +27,7 @@ class Tart < Formula
     end
     if Hardware::CPU.intel?
       url "https://github.com/darren/tart/archive/refs/heads/x86.zip"
-      sha256 "61177504d212d8f1e469272bf6a36a2998550f0565571668e5a0acca13cdf943"
+      sha256 "6ea7ac7d2d06bd79ea49b8b3f77f25b140038980ebf0115ec7bfcbc91e47e3b9"
       def install
         system "swift build --product tart --configuration release --disable-sandbox"
         system "codesign --sign - --entitlements Resources/tart-prod.entitlements --force .build/release/tart"
