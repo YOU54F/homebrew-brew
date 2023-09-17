@@ -7,15 +7,13 @@ class Softnet < Formula
   homepage "https://github.com/cirruslabs/softnet"
   version "0.7.2"
   depends_on :macos
-
+  depends_on "rust" => :build
+  url "https://github.com/cirruslabs/softnet/archive/refs/heads/main.zip"
+  sha256 "b337e4acf8318f694a077b3f4906768ee91534182e0984f64eb03e116d887e49"
   on_macos do
-    if Hardware::CPU.arm?
-      url "https://github.com/cirruslabs/softnet/releases/download/0.7.2/softnet.tar.gz"
-      sha256 "c7b8f049de790f0702eda7e3b8eb3cd70e778308b42f6ee2fa0d4a7d53a3308a"
-
-      def install
-        bin.install "softnet"
-      end
+    def install
+      system "cargo build --release"
+      bin.install "target/release/softnet" => "softnet"
     end
   end
 

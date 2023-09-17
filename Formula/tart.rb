@@ -11,7 +11,7 @@ class Tart < Formula
   depends_on "go-md2man" => :build
   depends_on "gpgme"
 
-  depends_on "cirruslabs/cli/softnet"
+  depends_on "you54f/brew/softnet"
   depends_on :macos
 
   on_macos do
