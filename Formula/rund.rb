@@ -6,7 +6,7 @@ class Rund < Formula
   version "0.0.1"
   license "Apache-2.0"
   url "https://github.com/macOScontainers/rund/archive/refs/heads/main.zip"
-  sha256 "6bf5db60f2237e3a38d66a6a3cb82f6d800980cf8558a6b0460d35aa5de557c7"
+  sha256 "e75a80bdffb91764556e6795c09096553a20640061e996169e4b36b16aaf7b4f"
   depends_on :macos
   depends_on "go" => :build
   depends_on "go-md2man" => :build

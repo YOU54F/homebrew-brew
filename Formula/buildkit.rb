@@ -3,7 +3,7 @@ class Buildkit < Formula
     homepage "https://github.com/moby/buildkit"
     url "https://github.com/macOScontainers/buildkit/archive/refs/heads/macos.zip"
     version "0.13.0"
-    sha256 "3ad69e1d45a2e94e201678b94cbbd45b2032cfcbe14b2a1109c9c685da6cbafd"
+    sha256 "fb61663dd939d811dc8048640fc745750b92816f60e77065953c56d9542ec279"
     license "Apache-2.0"
   
     depends_on "go" => :build
