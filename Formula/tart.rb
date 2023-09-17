@@ -44,10 +44,6 @@ class Tart < Formula
       app getting killed straight away? check your entitlements
       codesign --sign - --entitlements #{lib}/tart-dev.entitlements --force tart
       codesign --sign - --entitlements #{lib}/tart-prod.entitlements --force tart
-    EOS
-  end
-  def post_install
-    <<~EOS
       ## Creating from scratch
 
       Tart supports macOS and Linux virtual machines. All commands like `run` and `pull` work the same way regarding of the underlying OS a particular VM image has.
