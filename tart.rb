@@ -29,7 +29,7 @@ class Tart < Formula
       url "https://github.com/darren/tart/archive/refs/heads/x86.zip"
       sha256 "61177504d212d8f1e469272bf6a36a2998550f0565571668e5a0acca13cdf943"
       def install
-        system "swift build --product tart --configuration release"
+        system "swift build --product tart --configuration release --disable-sandbox"
         system "codesign --sign - --entitlements Resources/tart-prod.entitlements --force .build/release/tart"
         bin.install ".build/release/tart" => "tart"
       end
