@@ -15,9 +15,9 @@ class Tart < Formula
   depends_on :macos
 
   on_macos do
+    url "https://github.com/you54f/tart/archive/refs/heads/saf.zip"
+    sha256 "47e24a6d1fde732b19ba73decfc93ad487d886a3625bddbc4daa16d958d2a9a2"
     if Hardware::CPU.arm?
-      url "https://github.com/cirruslabs/tart/archive/refs/heads/main.zip"
-      sha256 "3e0852f9831ff90108a329e0bb7e375290e3b8db2ab8d3e72df494d4cdb62d1f"
 
       def install
         system "swift build --product tart --configuration release --disable-sandbox"
@@ -26,8 +26,6 @@ class Tart < Formula
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/darren/tart/archive/refs/heads/x86.zip"
-      sha256 "6ea7ac7d2d06bd79ea49b8b3f77f25b140038980ebf0115ec7bfcbc91e47e3b9"
       def install
         system "swift build --product tart --configuration release --disable-sandbox"
         system "codesign --sign - --entitlements Resources/tart-dev.entitlements --force .build/release/tart"
@@ -78,6 +76,8 @@ class Tart < Formula
       # Install Ubuntu
       tart run --disk focal-desktop-arm64.iso ubuntu
       
+      Note:- use amd64 only on intel macs, amd64 is acceptable on arm macs with `--rosetta` 
+
       # Run VM
       tart run ubuntu
       ```
