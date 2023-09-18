@@ -21,4 +21,11 @@ class Buildkit < Formula
   
       assert_match version.to_s, shell_output("#{bin}/buildctl --version")
     end
+    service do
+      run [bin/"buildkitd"]
+      require_root true
+      keep_alive always: true
+      working_dir HOMEBREW_PREFIX
+      environment_variables PATH: std_service_path_env
+    end
   end

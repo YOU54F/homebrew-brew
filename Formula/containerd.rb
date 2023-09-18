@@ -19,6 +19,14 @@ class Containerd < Formula
     bin.install "bin/main" => "ctr"
   end
 
+  service do
+    run [bin/"containerd"]
+    require_root true
+    keep_alive always: true
+    working_dir HOMEBREW_PREFIX
+    environment_variables PATH: std_service_path_env
+  end
+
   def caveats
     <<~EOS
       See the GitHub repository for more information
