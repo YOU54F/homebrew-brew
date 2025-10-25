@@ -6,25 +6,25 @@ The easier way to install the [`pact-cli`](https://github.com/YOU54F/pact-cli) &
 
 ## Installation
 
-    brew tap pact-foundation/pact-standalone
+    brew tap you54f/brew
     brew install pact
 
 or in a single line
 
-    brew install pact-foundation/pact/cli
+    brew install pact-foundation/brew/pact
 
 ##  Supported Platforms
 
 | OS      | Architecture | Supported |
 | ------- | ------------ | --------- |
-| OSX     | x86_64       | ✅        |
-| OSX     | arm64        | ✅        |
+| MacOS   | x86_64       | ✅        |
+| MacOS   | arm64        | ✅        |
 | Linux   | x86_64       | ✅        |
 | Linux   | arm64        | ✅        |
 
 ## Included tools
 
-- broker       A Rust and CLI client for the Pact Broker. Publish and retrieve pacts and     verification  results.
+- broker       A Rust and CLI client for the Pact Broker. Publish and retrieve pacts and verification  results.
 - pactflow     PactFlow specific commands
 - completions  Generates completion scripts for your shell
 - extension    Manage Pact CLI extensions
@@ -34,28 +34,44 @@ or in a single line
 - stub         Pact Stub Server 0.7.0
 - help         Print this message or the help of the given subcommand(s)
 
-```
+      ├── pact (central entry point to all binaries)
+      ├── pact broker
+      ├── pact pactflow
+      ├── pact plugin
+      ├── pact mock
+      ├── pact stub
+      ├── pact verifier
+      ├── pact completions
+      ├── pact stub
+      └── pact extension
 
-├── pact (central entry point to all binaries)
-├── pact broker
-├── pact pactflow
-├── pact plugin
-├── pact mock
-├── pact stub
-├── pact verifier
-├── pact completions
-├── pact stub
-└── pact extension
-```
+### Individual Tools
+
+### Pact Mock Server Cli
+
+    brew install pact-foundation/brew/pact-mock-server
+
+### Pact Stub Server Cli
+
+    brew install pact-foundation/brew/pact-stub-server
+
+### Pact Verifier Cli
+
+    brew install pact-foundation/brew/pact-verifier
+
+### Pact Plugin Cli
+
+    brew install pact-foundation/brew/pact-plugin
+
+### Pact Broker Client
+
+    brew install pact-foundation/brew/pact-broker-client
 
 ### Pact Ruby Standalone (Legacy)
 
 The following command can be used to install the pact ruby standalone bundle which is now in maintainence mode.
 
-```sh
-  brew tap pact-foundation/pact-standalone
-  brew install pact-standalone
-```
+    brew install pact-foundation/brew/pact-standalone
 
 ### Included legacy tools
 
