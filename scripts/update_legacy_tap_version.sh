@@ -41,10 +41,8 @@ write_homebrew_formulae() {
         echo "  end" >&3
         echo "" >&3
         echo "  def install" >&3
-        echo "    # pact-standalone" >&3
-        echo "    bin.install Dir[\"bin/*\"].reject { |f| f.end_with?(\"/pact\") }" >&3
+        echo "    bin.install Dir[\"bin/*\"].reject { |f| f.end_with?(\"/pact\", \"/pact-stub-server\", \"/pact_mock_server_cli\", \"/pact-plugin-cli\", \"/pact_verifier_cli\") }" >&3
         echo "    lib.install Dir[\"lib/*\"]" >&3
-        echo "    puts \"# Run 'pact-mock-service --help' (see $homepage/releases/)\"" >&3
         echo "  end" >&3
         echo "" >&3
         echo "  test do" >&3
