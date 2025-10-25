@@ -36,7 +36,6 @@ class PactLegacy < Formula
   test do
     system "#{bin}/pact-broker", "help"
     system "#{bin}/pact-message", "help"
-    system "#{bin}/pact-plugin-cli", "help"
     system "#{bin}/pact-mock-service", "help"
     system "#{bin}/pact-provider-verifier", "help"
     system "#{bin}/pact-stub-service", "help"
