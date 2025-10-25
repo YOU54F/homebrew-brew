@@ -11,7 +11,7 @@ The easier way to install the [`pact-cli`](https://github.com/YOU54F/pact-cli) &
 
 or in a single line
 
-    brew install pact-foundation/pact-standalone/pact
+    brew install pact-foundation/pact/cli
 
 ##  Supported Platforms
 
