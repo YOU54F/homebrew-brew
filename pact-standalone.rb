@@ -25,13 +25,12 @@ class PactStandalone < Formula
 
   def install
     # pact-standalone
-    bin.install Dir["bin/*"]
+    bin.install Dir["bin/*"].reject { |f| f.end_with?('/pact') }
     lib.install Dir["lib/*"]
     puts "# Run 'pact-mock-service --help' (see https://github.com/pact-foundation/pact-standalone/releases/)"
   end
 
   test do
-    system "#{bin}/pact", "help"
     system "#{bin}/pact-broker", "help"
     system "#{bin}/pact-message", "help"
     system "#{bin}/pact-plugin-cli", "help"

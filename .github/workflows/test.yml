@@ -13,7 +13,7 @@ jobs:
     name: test
     strategy:
       matrix:
-        os: [macos-13, macos-14,ubuntu-latest]
+        os: [macos-15, macos-15-intel,ubuntu-latest]
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
@@ -28,14 +28,14 @@ jobs:
         if: ${{ runner.os == 'Linux' }}
 
       - name: Install tap
-        if: matrix.os != 'macos-14'
+        if: matrix.os == 'macos-15-intel'
         run: |
           brew tap pact-foundation/pact-standalone
           cd $(brew --prefix)/Homebrew/Library/Taps/pact-foundation/homebrew-pact-standalone/
           git checkout ${{ github.sha }}
           brew install --verbose --debug pact-standalone
       - name: Install tap
-        if: matrix.os == 'macos-14'
+        if: matrix.os == 'macos-15'
         run: |
           brew tap pact-foundation/pact-standalone
           cd $(brew --prefix)/Library/Taps/pact-foundation/homebrew-pact-standalone/
