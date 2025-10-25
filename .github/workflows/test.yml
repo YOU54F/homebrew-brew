@@ -44,15 +44,15 @@ jobs:
       - name: Install tap
         if: matrix.os != 'macos-15'
         run: |
-          brew tap you54f/pact-standalone
-          cd $(brew --prefix)/Homebrew/Library/Taps/you54f/homebrew/
+          brew tap you54f/brew
+          cd $(brew --prefix)/Homebrew/Library/Taps/you54f/homebrew-brew/
           git checkout ${{ github.sha }}
           brew install --verbose --debug ${{ matrix.formulae }}
       - name: Install tap
         if: matrix.os == 'macos-15'
         run: |
-          brew tap you54f/pact-standalone
-          cd $(brew --prefix)/Library/Taps/you54f/homebrew/
+          brew tap you54f/brew
+          cd $(brew --prefix)/Library/Taps/you54f/homebrew-brew/
           git checkout ${{ github.sha }}
           brew install --verbose --debug ${{ matrix.formulae }}
 
