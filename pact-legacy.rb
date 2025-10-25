@@ -27,9 +27,9 @@ class PactLegacy < Formula
   end
 
   def install
-    bin.install Dir["bin/*"].reject do |f|
+    bin.install Dir["bin/*"].reject { |f|
       f.end_with?("/pact", "/pact-stub-server", "/pact_mock_server_cli", "/pact-plugin-cli", "/pact_verifier_cli")
-    end
+    }.to_a
     lib.install Dir["lib/*"]
   end
 

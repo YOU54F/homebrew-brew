@@ -42,9 +42,9 @@ write_homebrew_formulae() {
         echo "  end" >&3
         echo "" >&3
         echo "  def install" >&3
-        echo "    bin.install Dir[\"bin/*\"].reject do |f|" >&3
+        echo "    bin.install Dir[\"bin/*\"].reject { |f|" >&3
         echo "      f.end_with?(\"/pact\", \"/pact-stub-server\", \"/pact_mock_server_cli\", \"/pact-plugin-cli\", \"/pact_verifier_cli\")" >&3
-        echo "    end" >&3
+        echo "    }.to_a" >&3
         echo "    lib.install Dir[\"lib/*\"]" >&3
         echo "  end" >&3
         echo "" >&3
