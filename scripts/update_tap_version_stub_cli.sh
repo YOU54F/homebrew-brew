@@ -20,40 +20,31 @@ write_homebrew_formulae() {
         : > "$FORMULAE_FILE"
     fi
 
+    filename_macos_arm=v$version/$APP_NAME-macos-aarch64.gz
+    filename_macos_x64=v$version/$APP_NAME-macos-x86_64.gz
+    filename_linux_arm=v$version/$APP_NAME-linux-aarch64.gz
+    filename_linux_x64=v$version/$APP_NAME-linux-x86_64.gz
 
-    filename_macos_arm=$TOOL_NAME-v$version/$APP_NAME-macos-aarch64.gz
-    filename_macos_x64=$TOOL_NAME-v$version/$APP_NAME-macos-x86_64.gz
-    filename_linux_arm=$TOOL_NAME-v$version/$APP_NAME-linux-aarch64.gz
-    filename_linux_x64=$TOOL_NAME-v$version/$APP_NAME-linux-x86_64.gz
-
-
-     exec 3<> $FORMULAE_FILE
+    exec 3<> $FORMULAE_FILE
         echo "class $FORMULA_NAME < Formula" >&3
         echo "  desc \"$DESCRIPTION\"" >&3
         echo "  homepage \"$homepage\"" >&3
         echo "  version \"$version\"" >&3
+        echo "  license \"MIT\"" >&3
         echo "" >&3
-        if [[ $sha_macos_x86_64 ]]; then
         echo "  on_macos do" >&3
-            if [[ $sha_macos_arm64 ]]; then
-            echo "    on_arm do" >&3
-            echo "      url \"$homepage/releases/download/$filename_macos_arm\"" >&3
-            echo "      sha256 \"${sha_macos_arm64}\"" >&3
-            echo "    end" >&3
-            else
-            echo "    on_arm do" >&3
-            echo "      url \"$homepage/releases/download/$filename_macos_x64\"" >&3
-            echo "      sha256 \"${sha_macos_x86_64}\"" >&3
-            echo "    end" >&3
-            fi
+        if [[ $sha_macos_arm64 ]]; then
+        echo "    on_arm do" >&3
+        echo "      url \"$homepage/releases/download/$filename_macos_arm\"" >&3
+        echo "      sha256 \"${sha_macos_arm64}\"" >&3
+        echo "    end" >&3
+        fi
         echo "    on_intel do" >&3
         echo "      url \"$homepage/releases/download/$filename_macos_x64\"" >&3
         echo "      sha256 \"${sha_macos_x86_64}\"" >&3
         echo "    end" >&3
         echo "  end" >&3
         echo "" >&3
-        fi
-        if [[ $filename_linux_x64 ]]; then
         echo "  on_linux do" >&3
         if [[ $sha_linux_arm64 ]]; then
         echo "    on_arm do" >&3
@@ -66,15 +57,52 @@ write_homebrew_formulae() {
         echo "      sha256 \"${sha_linux_x86_64}\"" >&3
         echo "    end" >&3
         echo "  end" >&3
-        fi
         echo "" >&3
         echo "  def install" >&3
-        echo "    # pact-reference" >&3
-        echo "    bin.install Dir[\"*\"]; puts \"# Run '$APP_NAME --help'\"" >&3
+        echo "    bin.install Dir[\"*\"]" >&3
+        echo "    puts \"# Run '$APP_NAME --help'\"" >&3
         echo "  end" >&3
         echo "" >&3
         echo "  test do" >&3
-        echo "    system \"#{bin}/$APP_NAME\", \"--help\"" >&3
+        echo "    system bin/\"$APP_NAME\", \"--help\"" >&3
+        echo "" >&3
+        echo "    # Test that we can create a simple pact file (mock functionality)" >&3
+        echo "    test_pact = testpath/\"test.json\"" >&3
+        echo "    test_pact.write <<~EOS" >&3
+        echo "      {" >&3
+        echo "        \"consumer\": { \"name\": \"TestConsumer\" }," >&3
+        echo "        \"provider\": { \"name\": \"TestProvider\" }," >&3
+        echo "        \"interactions\": [" >&3
+        echo "          {" >&3
+        echo "            \"description\": \"a test interaction\"," >&3
+        echo "            \"request\": {" >&3
+        echo "              \"method\": \"GET\"," >&3
+        echo "              \"path\": \"/test\"" >&3
+        echo "            }," >&3
+        echo "            \"response\": {" >&3
+        echo "              \"status\": 200," >&3
+        echo "              \"body\": \"test response\"" >&3
+        echo "            }" >&3
+        echo "          }" >&3
+        echo "        ]," >&3
+        echo "        \"metadata\": {" >&3
+        echo "          \"pactSpecification\": { \"version\": \"2.0.0\" }" >&3
+        echo "        }" >&3
+        echo "      }" >&3
+        echo "    EOS" >&3
+        echo "" >&3
+        echo "    # Test that stub server can start and respond with the pact file" >&3
+        echo "    port = 9999" >&3
+        echo "    pid = spawn(\"#{bin}/$APP_NAME --file #{test_pact} --port #{port}\")" >&3
+        echo "    sleep 2 # Give server time to start" >&3
+        echo "" >&3
+        echo "    begin" >&3
+        echo "      response = shell_output(\"curl -s http://localhost:#{port}/test\")" >&3
+        echo "      assert_match \"test response\", response" >&3
+        echo "    ensure" >&3
+        echo "      Process.kill(\"TERM\", pid)" >&3
+        echo "      Process.wait(pid)" >&3
+        echo "    end" >&3
         echo "  end" >&3
         echo "end" >&3
     exec 3>&-

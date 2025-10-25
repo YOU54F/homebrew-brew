@@ -20,69 +20,50 @@ write_homebrew_formulae() {
         : > "$FORMULAE_FILE"
     fi
 
-
     filename_macos_arm=$TOOL_NAME-v$version/$APP_NAME-macos-aarch64.gz
     filename_macos_x64=$TOOL_NAME-v$version/$APP_NAME-macos-x86_64.gz
     filename_linux_arm=$TOOL_NAME-v$version/$APP_NAME-linux-aarch64.gz
     filename_linux_x64=$TOOL_NAME-v$version/$APP_NAME-linux-x86_64.gz
 
-
-     exec 3<> $FORMULAE_FILE
+    exec 3<> $FORMULAE_FILE
         echo "class $FORMULA_NAME < Formula" >&3
         echo "  desc \"$DESCRIPTION\"" >&3
         echo "  homepage \"$homepage\"" >&3
         echo "  version \"$version\"" >&3
+        echo "  license \"MIT\"" >&3
         echo "" >&3
-        if [[ $sha_macos_x86_64 ]]; then
         echo "  on_macos do" >&3
-            if [[ $sha_macos_arm64 ]]; then
-            echo "    on_arm do" >&3
-            echo "      url \"$homepage/releases/download/$filename_macos_arm\"" >&3
-            echo "      sha256 \"${sha_macos_arm64}\"" >&3
-            echo "    end" >&3
-            else
-            echo "    on_arm do" >&3
-            echo "      url \"$homepage/releases/download/$filename_macos_x64\"" >&3
-            echo "      sha256 \"${sha_macos_x86_64}\"" >&3
-            echo "    end" >&3
-            fi
+        echo "    on_arm do" >&3
+        echo "      url \"$homepage/releases/download/$filename_macos_arm\"" >&3
+        echo "      sha256 \"${sha_macos_arm64}\"" >&3
+        echo "    end" >&3
         echo "    on_intel do" >&3
         echo "      url \"$homepage/releases/download/$filename_macos_x64\"" >&3
         echo "      sha256 \"${sha_macos_x86_64}\"" >&3
         echo "    end" >&3
         echo "  end" >&3
         echo "" >&3
-        fi
-        if [[ $filename_linux_x64 ]]; then
         echo "  on_linux do" >&3
-        if [[ $sha_linux_arm64 ]]; then
         echo "    on_arm do" >&3
         echo "      url \"$homepage/releases/download/$filename_linux_arm\"" >&3
         echo "      sha256 \"${sha_linux_arm64}\"" >&3
         echo "    end" >&3
-        fi
         echo "    on_intel do" >&3
         echo "      url \"$homepage/releases/download/$filename_linux_x64\"" >&3
         echo "      sha256 \"${sha_linux_x86_64}\"" >&3
         echo "    end" >&3
         echo "  end" >&3
-        fi
         echo "" >&3
         echo "  def install" >&3
-        echo "    # pact-reference" >&3
-        echo "    bin.install Dir[\"*\"]; puts \"# Run '$APP_NAME --help'\"" >&3
-        if [[ -z $sha_macos_arm64 ]]; then
-            echo "    on_macos do" >&3
-            echo "      on_arm do" >&3
-            echo "        puts \"# Rosetta is required to run $APP_NAME commands\"" >&3
-            echo "        puts \"# sudo softwareupdate --install-rosetta --agree-to-license\"" >&3
-            echo "      end" >&3
-            echo "    end" >&3      
-        fi
+        echo "    bin.install Dir[\"*\"]" >&3
+        echo "    puts \"# Run '$APP_NAME --help'\"" >&3
         echo "  end" >&3
         echo "" >&3
         echo "  test do" >&3
-        echo "    system \"#{bin}/$APP_NAME\", \"--help\"" >&3
+        echo "    system bin/\"$APP_NAME\", \"list\", \"known\"" >&3
+        echo "    assert_match \"protobuf\", shell_output(\"#{bin}/$APP_NAME list known\")" >&3
+        echo "    assert_match \"csv\", shell_output(\"#{bin}/$APP_NAME list known\")" >&3
+        echo "    assert_match \"avro\", shell_output(\"#{bin}/$APP_NAME list known\")" >&3
         echo "  end" >&3
         echo "end" >&3
     exec 3>&-

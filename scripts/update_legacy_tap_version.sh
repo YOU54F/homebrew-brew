@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-homepage="https://github.com/pact-foundation/pact-standalone"
+homepage="https://github.com/you54f/pact-standalone"
 version=$1
 FORMULAE_FILE="pact-standalone.rb"
 

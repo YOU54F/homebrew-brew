@@ -2,6 +2,7 @@ class PactPlugin < Formula
   desc "Standalone Pact Plugin CLI executable"
   homepage "https://github.com/you54f/pact-plugins"
   version "0.2.0"
+  license "MIT"
 
   on_macos do
     on_arm do
@@ -26,11 +27,14 @@ class PactPlugin < Formula
   end
 
   def install
-    # pact-reference
-    bin.install Dir["*"]; puts "# Run 'pact-plugin --help'"
+    bin.install Dir["*"]
+    puts "# Run 'pact-plugin --help'"
   end
 
   test do
-    system "#{bin}/pact-plugin", "--help"
+    system bin/"pact-plugin", "list", "known"
+    assert_match "protobuf", shell_output("#{bin}/pact-plugin list known")
+    assert_match "csv", shell_output("#{bin}/pact-plugin list known")
+    assert_match "avro", shell_output("#{bin}/pact-plugin list known")
   end
 end

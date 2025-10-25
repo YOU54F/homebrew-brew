@@ -1,33 +1,35 @@
 class PactStandalone < Formula
   desc "Standalone pact CLI executable using the Ruby Pact impl and Traveling Ruby"
-  homepage "https://github.com/pact-foundation/pact-standalone"
-  version "2.5.4"
+  homepage "https://github.com/you54f/pact-standalone"
+  version "2.5.6"
+  license "MIT"
+  
   on_macos do
     on_intel do
-      url "https://github.com/pact-foundation/pact-standalone/releases/download/v2.5.4/pact-2.5.4-osx-x86_64.tar.gz"
-      sha256 "16c55205ad09f1508e2213cb3b97ba355bbd15e4885b32021f949991f2eb0b26"
+      url "https://github.com/you54f/pact-standalone/releases/download/v2.5.6/pact-2.5.6-osx-x86_64.tar.gz"
+      sha256 "dff43438408be2924a72143d464b706ce7860ab3c9e247a4e33a0f5016de3f31"
     end
     on_arm do
-      url "https://github.com/pact-foundation/pact-standalone/releases/download/v2.5.4/pact-2.5.4-osx-arm64.tar.gz"
-      sha256 "053f5650b10ef1a391239827311517e445662ebd3fa012990b30a4d7036cb5b4"
+      url "https://github.com/you54f/pact-standalone/releases/download/v2.5.6/pact-2.5.6-osx-arm64.tar.gz"
+      sha256 "c8b243023df2076155ef9ea0dd0defccbf59320907ccbe7dbdb453476ad3b6db"
     end
   end
   on_linux do
     on_intel do
-      url "https://github.com/pact-foundation/pact-standalone/releases/download/v2.5.4/pact-2.5.4-linux-x86_64.tar.gz"
-      sha256 "02a53686fda15fdaea1ea56da18efe31c430e3db965b28289052577d3f0892c0"
+      url "https://github.com/you54f/pact-standalone/releases/download/v2.5.6/pact-2.5.6-linux-x86_64.tar.gz"
+      sha256 "a52dd787ffb6373cbfa92e273db918a36457290e1594b21eb5c9b69f3d78e240"
     end
     on_arm do
-      url "https://github.com/pact-foundation/pact-standalone/releases/download/v2.5.4/pact-2.5.4-linux-arm64.tar.gz"
-      sha256 "48816be91db70b2ddbb1f5a0f85228fd0caf7fd57b49becde9ca272dd816ffbe"
+      url "https://github.com/you54f/pact-standalone/releases/download/v2.5.6/pact-2.5.6-linux-arm64.tar.gz"
+      sha256 "1fa703c7fdd01270160d63d6b1dc17b1e8dde0861ce185060818f9261c9cbd52"
     end
   end
 
   def install
     # pact-standalone
-    bin.install Dir["bin/*"].reject { |f| f.end_with?('/pact') }
+    bin.install Dir["bin/*"].reject { |f| f.end_with?("/pact") }
     lib.install Dir["lib/*"]
-    puts "# Run 'pact-mock-service --help' (see https://github.com/pact-foundation/pact-standalone/releases/)"
+    puts "# Run 'pact-mock-service --help' (see https://github.com/you54f/pact-standalone/releases/)"
   end
 
   test do

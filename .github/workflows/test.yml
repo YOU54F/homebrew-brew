@@ -13,7 +13,21 @@ jobs:
     name: test
     strategy:
       matrix:
-        os: [macos-15, macos-15-intel,ubuntu-latest]
+        os: [
+          macos-15, 
+          macos-15-intel,
+          ubuntu-latest, 
+          ubuntu-22.04-arm
+        ]
+        formulae: [
+          pact,
+          pact-stub-server,
+          pact-plugin,
+          pact-mock-server,
+          pact-verifier,
+          pact-standalone,
+          pact-ruby-standalone,
+        ]
       fail-fast: false
     runs-on: ${{ matrix.os }}
 
@@ -28,36 +42,24 @@ jobs:
         if: ${{ runner.os == 'Linux' }}
 
       - name: Install tap
-        if: matrix.os == 'macos-15-intel'
+        if: matrix.os != 'macos-15'
         run: |
-          brew tap pact-foundation/pact-standalone
+          brew tap you54f/pact-standalone
           cd $(brew --prefix)/Homebrew/Library/Taps/you54f/homebrew-pact-standalone/
           git checkout ${{ github.sha }}
-          brew install --verbose --debug pact-standalone
+          brew install --verbose --debug ${{ matrix.formulae }}
       - name: Install tap
         if: matrix.os == 'macos-15'
         run: |
-          brew tap pact-foundation/pact-standalone
+          brew tap you54f/pact-standalone
           cd $(brew --prefix)/Library/Taps/you54f/homebrew-pact-standalone/
           git checkout ${{ github.sha }}
-          brew install --verbose --debug pact-standalone
+          brew install --verbose --debug ${{ matrix.formulae }}
 
       - name: Brew test tap
         run: |
-          brew test pact-standalone
-
-      - name: Test tap
-        run: |
-          pact
-          pact-broker --help
-          pact-message --help
-          pact-mock-service --help
-          pact-plugin-cli --help
-          pact-provider-verifier --help
-          pact-stub-service --help
-          pactflow --help
-
+          brew test ${{ matrix.formulae }} --verbose --debug
 
       - name: Audit tap
         run: |
-          brew audit --strict --online pact-standalone
+          brew audit --strict --online ${{ matrix.formulae }}

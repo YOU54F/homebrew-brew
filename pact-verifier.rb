@@ -2,6 +2,7 @@ class PactVerifier < Formula
   desc "Standalone Pact Verifier CLI executable using the Rust Pact impl"
   homepage "https://github.com/you54f/pact-reference"
   version "1.3.0"
+  license "MIT"
 
   on_macos do
     on_arm do
@@ -26,11 +27,84 @@ class PactVerifier < Formula
   end
 
   def install
-    # pact-reference
-    bin.install Dir["*"]; puts "# Run 'pact-verifier --help'"
+    bin.install Dir["*"]
+    puts "# Run 'pact-verifier --help'"
   end
 
   test do
-    system "#{bin}/pact-verifier", "--help"
+    # Create a simple pact file for testing
+    pact_file = testpath/"test.json"
+    pact_file.write <<~JSON
+      {
+        "consumer": {
+          "name": "anotherclient"
+        },
+        "provider": {
+          "name": "they"
+        },
+        "interactions": [
+          {
+            "description": "Greeting",
+            "request": {
+              "method": "GET",
+              "path": "/"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+              },
+              "body": {
+                "greeting": "Hello"
+              }
+            }
+          },
+          {
+            "description": "Provider state success",
+            "providerState": "There is a greeting",
+            "request": {
+              "method": "GET",
+              "path": "/somestate"
+            },
+            "response": {
+              "status": 200,
+              "headers": {
+              },
+              "body": {
+                "greeting": "State data!"
+              }
+            }
+          }
+        ],
+        "metadata": {
+          "pactSpecification": {
+            "version": "2.0.0"
+          }
+        }
+      }
+    JSON
+
+    # Test basic help command
+    system bin/"pact-verifier", "--help"
+
+    # Test that the binary exists and is executable
+    assert_path_exists bin/"pact-verifier"
+    assert_predicate bin/"pact-verifier", :executable?
+
+    # Test version output
+    output = shell_output("#{bin}/pact-verifier --version")
+    assert_match version.to_s, output
+
+    # Run verifier against test API
+    verifier_output = shell_output([
+      "#{bin}/pact-verifier",
+      "--hostname", "localhost",
+      "--port", "4567",
+      "--file", pact_file.to_s,
+      "--state-change-url", "http://localhost:4567/provider-state",
+      "--no-colour"
+    ].join(" "), 1)
+    puts verifier_output
+    assert_match "Verifying a pact between anotherclient and they", verifier_output
+    assert_match "There were 2 pact failures", verifier_output
   end
 end

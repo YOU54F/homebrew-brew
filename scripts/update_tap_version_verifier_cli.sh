@@ -21,61 +21,128 @@ write_homebrew_formulae() {
         : > "$FORMULAE_FILE"
     fi
 
-
     filename_macos_arm=$TOOL_NAME-v$version/$APP_NAME-macos-aarch64.gz
     filename_macos_x64=$TOOL_NAME-v$version/$APP_NAME-macos-x86_64.gz
     filename_linux_arm=$TOOL_NAME-v$version/$APP_NAME-linux-aarch64.gz
     filename_linux_x64=$TOOL_NAME-v$version/$APP_NAME-linux-x86_64.gz
 
-
-     exec 3<> $FORMULAE_FILE
+    exec 3<> $FORMULAE_FILE
         echo "class $FORMULA_NAME < Formula" >&3
         echo "  desc \"$DESCRIPTION\"" >&3
         echo "  homepage \"$homepage\"" >&3
         echo "  version \"$version\"" >&3
+        echo "  license \"MIT\"" >&3
         echo "" >&3
-        if [[ $sha_macos_x86_64 ]]; then
+        
         echo "  on_macos do" >&3
-            if [[ $sha_macos_arm64 ]]; then
+        if [[ $sha_macos_arm64 ]]; then
             echo "    on_arm do" >&3
             echo "      url \"$homepage/releases/download/$filename_macos_arm\"" >&3
             echo "      sha256 \"${sha_macos_arm64}\"" >&3
             echo "    end" >&3
-            else
-            echo "    on_arm do" >&3
-            echo "      url \"$homepage/releases/download/$filename_macos_x64\"" >&3
-            echo "      sha256 \"${sha_macos_x86_64}\"" >&3
-            echo "    end" >&3
-            fi
+        fi
         echo "    on_intel do" >&3
         echo "      url \"$homepage/releases/download/$filename_macos_x64\"" >&3
         echo "      sha256 \"${sha_macos_x86_64}\"" >&3
         echo "    end" >&3
         echo "  end" >&3
         echo "" >&3
-        fi
-        if [[ $filename_linux_x64 ]]; then
+        
         echo "  on_linux do" >&3
         if [[ $sha_linux_arm64 ]]; then
-        echo "    on_arm do" >&3
-        echo "      url \"$homepage/releases/download/$filename_linux_arm\"" >&3
-        echo "      sha256 \"${sha_linux_arm64}\"" >&3
-        echo "    end" >&3
+            echo "    on_arm do" >&3
+            echo "      url \"$homepage/releases/download/$filename_linux_arm\"" >&3
+            echo "      sha256 \"${sha_linux_arm64}\"" >&3
+            echo "    end" >&3
         fi
         echo "    on_intel do" >&3
         echo "      url \"$homepage/releases/download/$filename_linux_x64\"" >&3
         echo "      sha256 \"${sha_linux_x86_64}\"" >&3
         echo "    end" >&3
         echo "  end" >&3
-        fi
         echo "" >&3
+        
         echo "  def install" >&3
-        echo "    # pact-reference" >&3
-        echo "    bin.install Dir[\"*\"]; puts \"# Run '$APP_NAME --help'\"" >&3
+        echo "    bin.install Dir[\"*\"]" >&3
+        echo "    puts \"# Run '$APP_NAME --help'\"" >&3
         echo "  end" >&3
         echo "" >&3
+        
         echo "  test do" >&3
-        echo "    system \"#{bin}/$APP_NAME\", \"--help\"" >&3
+        echo "    # Create a simple pact file for testing" >&3
+        echo "    pact_file = testpath/\"test.json\"" >&3
+        echo "    pact_file.write <<~JSON" >&3
+        echo "      {" >&3
+        echo "        \"consumer\": {" >&3
+        echo "          \"name\": \"anotherclient\"" >&3
+        echo "        }," >&3
+        echo "        \"provider\": {" >&3
+        echo "          \"name\": \"they\"" >&3
+        echo "        }," >&3
+        echo "        \"interactions\": [" >&3
+        echo "          {" >&3
+        echo "            \"description\": \"Greeting\"," >&3
+        echo "            \"request\": {" >&3
+        echo "              \"method\": \"GET\"," >&3
+        echo "              \"path\": \"/\"" >&3
+        echo "            }," >&3
+        echo "            \"response\": {" >&3
+        echo "              \"status\": 200," >&3
+        echo "              \"headers\": {" >&3
+        echo "              }," >&3
+        echo "              \"body\": {" >&3
+        echo "                \"greeting\": \"Hello\"" >&3
+        echo "              }" >&3
+        echo "            }" >&3
+        echo "          }," >&3
+        echo "          {" >&3
+        echo "            \"description\": \"Provider state success\"," >&3
+        echo "            \"providerState\": \"There is a greeting\"," >&3
+        echo "            \"request\": {" >&3
+        echo "              \"method\": \"GET\"," >&3
+        echo "              \"path\": \"/somestate\"" >&3
+        echo "            }," >&3
+        echo "            \"response\": {" >&3
+        echo "              \"status\": 200," >&3
+        echo "              \"headers\": {" >&3
+        echo "              }," >&3
+        echo "              \"body\": {" >&3
+        echo "                \"greeting\": \"State data!\"" >&3
+        echo "              }" >&3
+        echo "            }" >&3
+        echo "          }" >&3
+        echo "        ]," >&3
+        echo "        \"metadata\": {" >&3
+        echo "          \"pactSpecification\": {" >&3
+        echo "            \"version\": \"2.0.0\"" >&3
+        echo "          }" >&3
+        echo "        }" >&3
+        echo "      }" >&3
+        echo "    JSON" >&3
+        echo "" >&3
+        echo "    # Test basic help command" >&3
+        echo "    system bin/\"$APP_NAME\", \"--help\"" >&3
+        echo "" >&3
+        echo "    # Test that the binary exists and is executable" >&3
+        echo "    assert_path_exists bin/\"$APP_NAME\"" >&3
+        echo "    assert_predicate bin/\"$APP_NAME\", :executable?" >&3
+        echo "" >&3
+        echo "    # Test version output" >&3
+        echo "    output = shell_output(\"#{bin}/$APP_NAME --version\")" >&3
+        echo "    assert_match version.to_s, output" >&3
+        echo "" >&3
+        echo "    # Run verifier against test API" >&3
+        echo "    verifier_output = shell_output([" >&3
+        echo "      \"#{bin}/$APP_NAME\"," >&3
+        echo "      \"--hostname\", \"localhost\"," >&3
+        echo "      \"--port\", \"4567\"," >&3
+        echo "      \"--file\", pact_file.to_s," >&3
+        echo "      \"--state-change-url\", \"http://localhost:4567/provider-state\"," >&3
+        echo "      \"--no-colour\"" >&3
+        echo "    ].join(\" \"), 1)" >&3
+        echo "    puts verifier_output" >&3
+        echo "    assert_match \"Verifying a pact between anotherclient and they\", verifier_output" >&3
+        echo "    assert_match \"There were 2 pact failures\", verifier_output" >&3
         echo "  end" >&3
         echo "end" >&3
     exec 3>&-
