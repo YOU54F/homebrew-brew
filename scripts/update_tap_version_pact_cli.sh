@@ -174,7 +174,7 @@ APP_NAME="pact"
             echo "      File.write(pact_file, JSON.pretty_generate(pact_content))" >&3
             echo "" >&3
             echo "      mock_output = begin" >&3
-            echo "        \`#{bin}/$APP_NAME create --file #{pact_file} --port 1234 2>/dev/null\`" >&3
+            echo "        \`#{bin}/$APP_NAME mock create --file #{pact_file} --port 1234 2>/dev/null\`" >&3
             echo "      rescue" >&3
             echo "        \"Mock server created\"" >&3
             echo "      end" >&3

@@ -154,7 +154,7 @@ class Pact < Formula
       File.write(pact_file, JSON.pretty_generate(pact_content))
 
       mock_output = begin
-        `#{bin}/pact create --file #{pact_file} --port 1234 2>/dev/null`
+        `#{bin}/pact mock create --file #{pact_file} --port 1234 2>/dev/null`
       rescue
         "Mock server created"
       end
