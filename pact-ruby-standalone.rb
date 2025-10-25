@@ -3,7 +3,7 @@ class PactRubyStandalone < Formula
   homepage "https://github.com/you54f/pact-standalone"
   version "2.5.6"
   license "MIT"
-  
+
   on_macos do
     on_intel do
       url "https://github.com/you54f/pact-standalone/releases/download/v2.5.6/pact-2.5.6-osx-x86_64.tar.gz"

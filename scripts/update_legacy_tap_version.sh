@@ -17,6 +17,8 @@ write_homebrew_formulae() {
         echo "  desc \"Standalone pact CLI executable using the Ruby Pact impl and Traveling Ruby\"" >&3
         echo "  homepage \"$homepage\"" >&3
         echo "  version \"$version\"" >&3
+        echo "  license \"MIT\"" >&3
+        echo "" >&3
         echo "  on_macos do" >&3
         echo "    on_intel do" >&3
         echo "      url \"$homepage/releases/download/v$version/pact-$version-osx-x86_64.tar.gz\"" >&3
