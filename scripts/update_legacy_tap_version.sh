@@ -3,7 +3,7 @@ set -e
 
 homepage="https://github.com/you54f/pact-standalone"
 version=$1
-FORMULAE_FILE="pact-standalone.rb"
+FORMULAE_FILE="pact-legacy.rb"
 
 write_homebrew_formulae() {
     if [ ! -f "$FORMULAE_FILE" ] ; then
@@ -13,11 +13,12 @@ write_homebrew_formulae() {
     fi
 
      exec 3<> $FORMULAE_FILE
-        echo "class PactStandalone < Formula" >&3
+        echo "class PactLegacy < Formula" >&3
         echo "  desc \"Standalone pact CLI executable using the Ruby Pact impl and Traveling Ruby\"" >&3
         echo "  homepage \"$homepage\"" >&3
         echo "  version \"$version\"" >&3
         echo "  license \"MIT\"" >&3
+        echo "  deprecate! date: \"2026-01-01\", because: :reason, replacement_formula: \"you54f/brew/pact\"" >&3
         echo "" >&3
         echo "  on_macos do" >&3
         echo "    on_intel do" >&3
@@ -41,7 +42,9 @@ write_homebrew_formulae() {
         echo "  end" >&3
         echo "" >&3
         echo "  def install" >&3
-        echo "    bin.install Dir[\"bin/*\"].reject { |f| f.end_with?(\"/pact\", \"/pact-stub-server\", \"/pact_mock_server_cli\", \"/pact-plugin-cli\", \"/pact_verifier_cli\") }" >&3
+        echo "    bin.install Dir[\"bin/*\"].reject do |f|" >&3
+        echo "      f.end_with?(\"/pact\", \"/pact-stub-server\", \"/pact_mock_server_cli\", \"/pact-plugin-cli\", \"/pact_verifier_cli\")" >&3
+        echo "    end" >&3
         echo "    lib.install Dir[\"lib/*\"]" >&3
         echo "  end" >&3
         echo "" >&3
