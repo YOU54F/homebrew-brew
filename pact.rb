@@ -225,7 +225,7 @@ class Pact < Formula
     # --- Test Stub Server subcommand --- #
 
     # Test that we can create a simple pact file (mock functionality)
-    test_pact = testpath/"test.json"
+    test_pact = testpath/"stub.json"
     test_pact.write <<~EOS
       {
         "consumer": { "name": "TestConsumer" },
@@ -264,7 +264,7 @@ class Pact < Formula
 
     # --- Test Provider Verifier subcommand --- #
     # Create a simple pact file for testing
-    pact_file = testpath/"test.json"
+    pact_file = testpath/"verifier.json"
     pact_file.write <<~JSON
       {
         "consumer": {

@@ -245,7 +245,7 @@ APP_NAME="pact"
             echo "    # --- Test Stub Server subcommand --- #" >&3
             echo "" >&3
             echo "    # Test that we can create a simple pact file (mock functionality)" >&3
-            echo "    test_pact = testpath/\"test.json\"" >&3
+            echo "    test_pact = testpath/\"stub.json\"" >&3
             echo "    test_pact.write <<~EOS" >&3
             echo "      {" >&3
             echo "        \"consumer\": { \"name\": \"TestConsumer\" }," >&3
@@ -284,7 +284,7 @@ APP_NAME="pact"
             echo "" >&3
             echo "    # --- Test Provider Verifier subcommand --- #" >&3
             echo "    # Create a simple pact file for testing" >&3
-            echo "    pact_file = testpath/\"test.json\"" >&3
+            echo "    pact_file = testpath/\"verifier.json\"" >&3
             echo "    pact_file.write <<~JSON" >&3
             echo "      {" >&3
             echo "        \"consumer\": {" >&3
